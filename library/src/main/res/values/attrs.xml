@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Button color-->
+    <attr name="colorButtonActive" format="reference|color" />
+    <attr name="colorButtonInactive" format="reference|color" />
+
+</resources>

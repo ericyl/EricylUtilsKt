@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Example</string>
+
+    <string name="choose_app">应用选择器</string>
+</resources>
