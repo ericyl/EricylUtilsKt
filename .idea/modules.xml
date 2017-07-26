@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/EricylUtils.iml" filepath="$PROJECT_DIR$/EricylUtils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EricylUtilsKt.iml" filepath="$PROJECT_DIR$/EricylUtilsKt.iml" />
       <module fileurl="file://$PROJECT_DIR$/example/example.iml" filepath="$PROJECT_DIR$/example/example.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
     </modules>
