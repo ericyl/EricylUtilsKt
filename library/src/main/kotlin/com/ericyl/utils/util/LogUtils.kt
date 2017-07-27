@@ -31,8 +31,8 @@ inline fun <reified T> T.showWarnLog(message: Any?): Int? {
     return showLog(message, Log.WARN)
 }
 
-inline fun <reified T> T.showLog(message: Any?, level: Int? = Log.DEBUG): Int? {
-    return ::log.getLog(T::class.java.simpleName, level!!)(message)
+inline fun <reified T> T.showLog(message: Any?, level: Int = Log.DEBUG): Int? {
+    return ::log.getLog(T::class.java.simpleName, level)(message)
 }
 
 fun <P1, P2, P3, R> Function3<P1, P2, P3, R>.getLog(p1: P1, p2: P2) = fun(p3: P3) = this(p1, p2, p3)

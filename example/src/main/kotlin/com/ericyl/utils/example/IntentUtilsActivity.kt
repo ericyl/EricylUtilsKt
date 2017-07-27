@@ -15,7 +15,7 @@ import java.io.File
 
 const val CODE_CALL_PHONE = 1
 
-class IntentUtilsActivity : BaseActivity(), View.OnClickListener {
+class IntentUtilsActivity : BaseActivity() {
 
     private lateinit var fileName: String
 
@@ -39,9 +39,17 @@ class IntentUtilsActivity : BaseActivity(), View.OnClickListener {
                     "${Environment.getExternalStorageDirectory().path}${File.separator}$fileName")
             R.id.btnOpenGallery -> openGallery(1)
             R.id.btnMakeCall -> {
-                checkPermissions(Manifest.permission.READ_PHONE_STATE, Manifest.permission.CALL_PHONE, Manifest.permission.READ_PHONE_STATE)
+                checkPermissions(Manifest.permission.READ_PHONE_STATE, Manifest.permission.CALL_PHONE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         .doIsOrNotEmptyAction(
-                                { requestUsedPermissions(CODE_CALL_PHONE, Manifest.permission.READ_PHONE_STATE) },
+                                {
+                                    requestUsedPermissions(CODE_CALL_PHONE, Manifest.permission.READ_PHONE_STATE, Manifest.permission.CALL_PHONE, Manifest.permission.WRITE_EXTERNAL_STORAGE, action = object : IShowRationaleListener {
+                                        override fun showRequestPermissionRationale(permissions: Array<out String>) {
+                                            Snackbar.make(btnMakeCall, R.string.please_allow_to_open_permission, Snackbar.LENGTH_SHORT).setAction(R.string.allow) {
+                                                requestUsedPermissions(CODE_CALL_PHONE, *permissions)
+                                            }.show()
+                                        }
+                                    })
+                                },
                                 { callPhone() }
                         )
             }
@@ -58,7 +66,9 @@ class IntentUtilsActivity : BaseActivity(), View.OnClickListener {
                     else null
                 }.filterNotNull().map(permissions::get).toTypedArray().let { permissionArray ->
                     if (permissionArray.isNotEmpty())
-                        Snackbar.make(btnMakeCall, "test", Snackbar.LENGTH_SHORT).setAction("Allow") { requestUsedPermissions(CODE_CALL_PHONE, *permissionArray) }.show()
+                        permissionArray.map { permissionName(it) }.toSet().joinToString().let {
+                            toast(getString(R.string.please_open_permission, it))
+                        }
                     else callPhone()
                 }
 
@@ -71,10 +81,10 @@ class IntentUtilsActivity : BaseActivity(), View.OnClickListener {
     fun callPhone() = getImsi().let {
         showLog(it.toString())
         when (it) {
-            IMSI.CHINA_TELECOM -> makeCall("10000")
-            IMSI.CHINA_UNICOM -> makeCall("10010")
-            IMSI.CMCC -> makeCall("10086")
-            else -> toast("error")
+            IMSI.CHINA_TELECOM -> makeCall(getString(R.string.china_telecom_service_phone_number))
+            IMSI.CHINA_UNICOM -> makeCall(getString(R.string.china_unicom_service_phone_number))
+            IMSI.CMCC -> makeCall(getString(R.string.cmcc_service_phone_number))
+            else -> toast(R.string.can_not_get_imsi_info)
         }
     }
 

@@ -17,11 +17,11 @@
         android:id="@+id/btnOpenGallery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="打开图库" />
+        android:text="@string/open_gallery" />
     <Button
         android:id="@+id/btnMakeCall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="拨打通信服务电话" />
+        android:text="@string/call_service_phone_number" />
 
 </android.support.v7.widget.LinearLayoutCompat>
