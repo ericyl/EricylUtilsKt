@@ -1,4 +1,4 @@
-package com.ericyl.utils.example
+package com.ericyl.utils.example.ui.activity
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.os.Environment
 import android.support.design.widget.Snackbar
 import android.view.View
+import com.ericyl.utils.example.BuildConfig
+import com.ericyl.utils.example.R
 import com.ericyl.utils.ui.BaseActivity
 import com.ericyl.utils.util.*
 import kotlinx.android.synthetic.main.activity_intents_utils.*
@@ -13,8 +15,7 @@ import org.jetbrains.anko.makeCall
 import org.jetbrains.anko.toast
 import java.io.File
 
-const val CODE_CALL_PHONE = 1
-
+private const val CODE_CALL_PHONE = 1
 class IntentUtilsActivity : BaseActivity() {
 
     private lateinit var fileName: String

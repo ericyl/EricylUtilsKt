@@ -5,3 +5,4 @@
 ### 0.0.1
 * 初始化项目
 * 完善 `PermissionUtils` 代码
+* 新增 AES 代码

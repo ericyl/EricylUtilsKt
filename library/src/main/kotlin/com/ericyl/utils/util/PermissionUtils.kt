@@ -14,11 +14,7 @@ import com.ericyl.utils.R
 fun ContextWrapper.checkPermission(permission: String) = ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
 
 fun ContextWrapper.checkPermissions(vararg permissions: String): Array<String> {
-    return permissions.filterNotNull().map {
-        if (!checkPermission(it))
-            it
-        else null
-    }.filterNotNull().toTypedArray()
+    return permissions.filterNotNull().partition { checkPermission(it) }.second.filterNotNull().toTypedArray()
 }
 
 fun Activity.requestUsedPermissions(requestCode: Int, vararg permissions: String, action: IShowRationaleListener? = null) {
