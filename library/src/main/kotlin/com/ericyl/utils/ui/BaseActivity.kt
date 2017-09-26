@@ -7,11 +7,12 @@ import android.view.View
 /**
  * Created by ericyl on 2017/7/24.
  */
-abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
+abstract class BaseActivity(private val showAction: Boolean = true) : AppCompatActivity(), View.OnClickListener {
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        if (showAction)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
         init(savedInstanceState)
     }
 

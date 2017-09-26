@@ -79,12 +79,12 @@ class IntentUtilsActivity : BaseActivity() {
     }
 
     @SuppressLint("MissingPermission")
-    fun callPhone() = getImsi().let {
+    private fun callPhone() = getImsi().let {
         showLog(it.toString())
         when (it) {
-            IMSI.CHINA_TELECOM -> makeCall(getString(R.string.china_telecom_service_phone_number))
-            IMSI.CHINA_UNICOM -> makeCall(getString(R.string.china_unicom_service_phone_number))
-            IMSI.CMCC -> makeCall(getString(R.string.cmcc_service_phone_number))
+            IMSI.CHINA_TELECOM -> makeCall("10000")
+            IMSI.CHINA_UNICOM -> makeCall("10010")
+            IMSI.CMCC -> makeCall("10086")
             else -> toast(R.string.can_not_get_imsi_info)
         }
     }

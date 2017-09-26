@@ -9,8 +9,11 @@
     <string name="please_allow_to_open_permission">请授予相关权限才可使用本功能</string>
     <string name="please_open_permission">请开启 %1$s 权限</string>
 
-    <string name="cmcc_service_phone_number">10086</string>
-    <string name="china_unicom_service_phone_number">10010</string>
-    <string name="china_telecom_service_phone_number">10000</string>
     <string name="can_not_get_imsi_info">无法获取通信运营商</string>
+
+    <string name="create_key">生成密钥</string>
+    <string name="read_key">从 Assets 中读取密钥</string>
+    <string name="encrypt">加密</string>
+    <string name="decrypt">解密</string>
+    <string name="save_key">保存密钥</string>
 </resources>

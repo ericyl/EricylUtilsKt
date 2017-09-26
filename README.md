@@ -13,8 +13,13 @@ Android 控件及公共类的封装
 * `Android Design Support Library`: [APL 2.0](https://source.android.com/source/licenses.html#android-open-source-project-license)
 * `Android SDK`: [APL 2.0](https://source.android.com/source/licenses.html#android-open-source-project-license)
 * `Android Support Tools`: [APL 2.0](https://source.android.com/source/licenses.html#android-open-source-project-license)
-* `kotlin`: [APL 2.0](https://github.com/JetBrains/kotlin/tree/master/license)
-* `anko`: [APL 2.0](https://raw.githubusercontent.com/Kotlin/anko/master/LICENSE)
+* `Kotlin`: [APL 2.0](https://github.com/JetBrains/kotlin/tree/master/license)
+* `Anko`: [APL 2.0](https://raw.githubusercontent.com/Kotlin/anko/master/LICENSE)
+* `RxKotlin`: [APL 2.0](https://raw.githubusercontent.com/ReactiveX/RxKotlin/2.x/LICENSE)
+* `RxAndroid`: [APL 2.0](https://raw.githubusercontent.com/ReactiveX/RxAndroid/2.x/LICENSE)
+* `RxJava`: [APL 2.0](https://raw.githubusercontent.com/ReactiveX/RxJava/2.x/LICENSE)
+* `SQLCipher for Android`: [APL 2.0](https://www.zetetic.net/sqlcipher/LICENSE.pdf)
+* `SQLCipher`: [BSD](https://www.zetetic.net/sqlcipher/license/)
 
 ### License
 ```

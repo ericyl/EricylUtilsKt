@@ -21,3 +21,10 @@ fun <T, R> Array<T>.doNotEmptyAction(action: (Array<T>) -> R): Array<T> {
         action(this)
     return this
 }
+
+inline fun <reified T: Any>T.setByFiled(name: String, value: Any): T{
+    val field  = this.javaClass.getDeclaredField(name)
+    field.isAccessible = true
+    field.set(this, value)
+    return this
+}
