@@ -1,7 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--Button color-->
-    <attr name="colorButtonActive" format="reference|color" />
-    <attr name="colorButtonInactive" format="reference|color" />
+    <!--<attr name="colorButtonActive" format="reference|color" />-->
+    <!--<attr name="colorButtonInactive" format="reference|color" />-->
 
+    <!--NumberPickerPreference-->
+    <declare-styleable name="NumberPickerPreference">
+        <attr name="max" format="integer" />
+        <attr name="min" format="integer" />
+        <attr name="maxExternal" format="reference|string" />
+        <attr name="minExternal" format="reference|string" />
+        <attr name="textEnable" />
+        <attr name="textDigits" format="string" />
+    </declare-styleable>
+
+    <!--RadioGroupPreference-->
+    <declare-styleable name="RadioGroupPreference">
+        <attr name="radioEntries" format="reference" />
+        <attr name="radioEntrySummaries" format="reference" />
+        <attr name="radioEntryValues" format="reference" />
+    </declare-styleable>
+
+    <!--ActionBadgeLayout-->
+    <declare-styleable name="ActionBadgeLayout">
+        <attr name="icon" format="reference" />
+        <attr name="badgeColor" format="reference" />
+    </declare-styleable>
+
+    <!--CircleTextView-->
+    <declare-styleable name="CircleTextView">
+        <attr name="backgroundColor" format="reference|color" />
+        <attr name="singleText" format="boolean" />
+    </declare-styleable>
+
+    <!--CustomSearchView-->
+    <declare-styleable name="CustomSearchView">
+        <attr name="custom_editTextSize" format="reference|dimension" />
+        <attr name="custom_imgGo" format="reference" />
+        <attr name="custom_goPaddingLeft" format="reference|dimension" />
+        <attr name="custom_goPaddingRight" format="reference|dimension" />
+        <attr name="custom_submitAreaBackground" format="reference|color" />
+        <attr name="custom_searchPlateBackground" format="reference|color" />
+    </declare-styleable>
+
+    <!--LoadingLayout-->
+    <declare-styleable name="LoadingLayout">
+        <attr name="showProgressBar" format="boolean" />
+        <attr name="loadingMessage" format="reference|string" />
+        <attr name="showFailedImage" format="boolean" />
+        <attr name="failedImage" format="reference" />
+        <attr name="failedImageColor" format="reference|color" />
+        <attr name="failedMessage" format="reference|string" />
+        <attr name="finishMessage" format="reference|string" />
+    </declare-styleable>
 </resources>

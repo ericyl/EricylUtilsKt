@@ -11,7 +11,7 @@ import android.provider.Settings
 import android.view.Surface
 
 /**
- * Created by ericyl on 2017/9/21.
+ * @author ericyl
  */
 //fun ContextWrapper.getDensity(): Float {
 //    return resources.displayMetrics.density
@@ -29,19 +29,19 @@ fun ContextWrapper.getScreenHeight(): Int {
     return resources.displayMetrics.heightPixels
 }
 
-fun ContextWrapper.dp2px(dp: Float, density: Float = resources.displayMetrics.density): Float {
+fun dp2px(context: Context, dp: Float, density: Float = context.resources.displayMetrics.density): Float {
     return dp * density + 0.5f * if (dp >= 0) 1 else -1
 }
 
-fun ContextWrapper.px2dp(px: Float, density: Float = resources.displayMetrics.density): Float {
+fun px2dp(context: Context, px: Float, density: Float = context.resources.displayMetrics.density): Float {
     return px / density + 0.5f * if (px >= 0) 1 else -1
 }
 
-fun ContextWrapper.sp2px(sp: Float, scaledDensity: Float = resources.displayMetrics.density): Float {
+fun sp2px(context: Context, sp: Float, scaledDensity: Float = context.resources.displayMetrics.density): Float {
     return sp * scaledDensity + 0.5f * if (sp >= 0) 1 else -1
 }
 
-fun ContextWrapper.px2sp(px: Float, scaledDensity: Float = resources.displayMetrics.density): Float {
+fun px2sp(context: Context, px: Float, scaledDensity: Float = context.resources.displayMetrics.density): Float {
     return px / scaledDensity + 0.5f * if (px >= 0) 1 else -1
 }
 

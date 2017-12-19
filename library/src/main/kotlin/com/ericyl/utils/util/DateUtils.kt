@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 /**
- * Created by ericyl on 2017/9/21.
+ * @author ericyl
  */
 const val DATE_YMD_OTHER = "yyyyMMdd"
 const val DATE_DEFAULT = "yyyy-MM-dd"

@@ -17,9 +17,8 @@ import javax.crypto.spec.PBEKeySpec
 import javax.crypto.spec.SecretKeySpec
 
 /**
- * Created by ericyl on 2017/7/31.
+ * @author ericyl
  */
-
 private const val SIZE_32 = 32
 
 fun getRandomBytes(size: Int = SIZE_32): ByteArray {

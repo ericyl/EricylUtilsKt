@@ -6,14 +6,15 @@ import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
 /**
- * Created by ericyl on 2017/7/31.
+ * @author ericyl
+ * 2017/7/31
  */
 internal class AESCryptoImpl private constructor(private val key: SecretKeySpec, algorithm: String, iv: ByteArray) : Cryptographical {
 
     private val ivSpec = IvParameterSpec(iv)
     private val cipher = Cipher.getInstance(algorithm)
 
-    companion object newInstance {
+    companion object {
         fun create(byteArray: ByteArray, iv: ByteArray, algorithm: String = "AES/CBC/PKCS7PADDING"): AESCryptoImpl {
             return AESCryptoImpl(AESCryptoKey(byteArray).getKey(), algorithm, iv)
         }

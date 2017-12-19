@@ -3,10 +3,8 @@ package com.ericyl.utils.util
 import android.util.Log
 
 /**
- * Created by ericyl on 2017/7/26.
+ * @author ericyl
  */
-
-
 inline fun <reified T> T.showDebugLog(message: Any?): Int? {
     return showLog(message, Log.DEBUG)
 }

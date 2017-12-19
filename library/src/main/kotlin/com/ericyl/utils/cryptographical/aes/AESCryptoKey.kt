@@ -5,7 +5,8 @@ import javax.crypto.SecretKey
 import javax.crypto.spec.SecretKeySpec
 
 /**
- * Created by ericyl on 2017/7/31.
+ * @author ericyl
+ * 2017/7/31
  */
 internal class AESCryptoKey(private val bytes: ByteArray) : CryptoKeyable<SecretKeySpec> {
 

@@ -9,17 +9,17 @@ import android.support.v4.content.ContextCompat
 import com.ericyl.utils.R
 
 /**
- * Created by ericyl on 2017/7/24.
+ * @author ericyl
  */
 fun ContextWrapper.checkPermission(permission: String) = ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
 
-fun ContextWrapper.checkPermissions(vararg permissions: String): Array<String> {
-    return permissions.filterNotNull().partition { checkPermission(it) }.second.filterNotNull().toTypedArray()
+fun ContextWrapper.checkPermissions(vararg permissions: String): Array<String>? {
+    return permissions.partition { checkPermission(it) }.second.toTypedArray()
 }
 
-fun Activity.requestUsedPermissions(requestCode: Int, vararg permissions: String, action: IShowRationaleListener? = null) {
-    permissions.filterNotNull().any { ActivityCompat.shouldShowRequestPermissionRationale(this, it) }.let {
-        if (it && action != null) action.showRequestPermissionRationale(permissions)
+fun Activity.requestUsedPermissions(requestCode: Int, vararg permissions: String, action: (permissions: List<String>) -> Unit) {
+    permissions.any { ActivityCompat.shouldShowRequestPermissionRationale(this, it) }.let {
+        if (it && permissions.isNotEmpty()) action(permissions.asList())
         else ActivityCompat.requestPermissions(this, permissions, requestCode)
     }
 }
@@ -36,6 +36,3 @@ fun ContextWrapper.permissionName(permission: String): String? {
     }
 }
 
-interface IShowRationaleListener {
-    fun showRequestPermissionRationale(permissions: Array<out String>)
-}

@@ -8,7 +8,7 @@ import android.support.design.widget.Snackbar
 import android.view.View
 import com.ericyl.utils.example.BuildConfig
 import com.ericyl.utils.example.R
-import com.ericyl.utils.ui.BaseActivity
+import com.ericyl.utils.ui.activity.BaseActivity
 import com.ericyl.utils.util.*
 import kotlinx.android.synthetic.main.activity_intents_utils.*
 import org.jetbrains.anko.makeCall
@@ -16,6 +16,7 @@ import org.jetbrains.anko.toast
 import java.io.File
 
 private const val CODE_CALL_PHONE = 1
+
 class IntentUtilsActivity : BaseActivity() {
 
     private lateinit var fileName: String
@@ -41,21 +42,27 @@ class IntentUtilsActivity : BaseActivity() {
             R.id.btnOpenGallery -> openGallery(1)
             R.id.btnMakeCall -> {
                 checkPermissions(Manifest.permission.READ_PHONE_STATE, Manifest.permission.CALL_PHONE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        .doIsOrNotEmptyAction(
+                        ?.doIsOrNotEmptyAction(
+                                { callPhone() },
                                 {
-                                    requestUsedPermissions(CODE_CALL_PHONE, Manifest.permission.READ_PHONE_STATE, Manifest.permission.CALL_PHONE, Manifest.permission.WRITE_EXTERNAL_STORAGE, action = object : IShowRationaleListener {
-                                        override fun showRequestPermissionRationale(permissions: Array<out String>) {
-                                            Snackbar.make(btnMakeCall, R.string.please_allow_to_open_permission, Snackbar.LENGTH_SHORT).setAction(R.string.allow) {
-                                                requestUsedPermissions(CODE_CALL_PHONE, *permissions)
-                                            }.show()
-                                        }
-                                    })
-                                },
-                                { callPhone() }
+                                    requestUsedPermissions(
+                                            CODE_CALL_PHONE,
+                                            Manifest.permission.READ_PHONE_STATE,
+                                            Manifest.permission.CALL_PHONE,
+                                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                            action = { e ->
+                                                Snackbar.make(btnMakeCall, R.string.please_allow_to_open_permission, Snackbar.LENGTH_SHORT).setAction(R.string.allow) {
+                                                    showLog(e)
+//                                                                    requestUsedPermissions(CODE_CALL_PHONE, e.toTypedArray(), action = {})
+                                                }.show()
+                                            }
+                                    )
+                                }
                         )
             }
         }
     }
+
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)

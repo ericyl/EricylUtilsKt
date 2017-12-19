@@ -6,9 +6,8 @@ import com.google.zxing.common.HybridBinarizer
 import java.util.*
 
 /**
- * Created by ericyl on 2017/9/20.
+ * @author ericyl
  */
-
 val hints = fun(formats: List<BarcodeFormat>): MutableMap<DecodeHintType, Any> {
     val hints: MutableMap<DecodeHintType, Any> = EnumMap<DecodeHintType, Any>(DecodeHintType::class.java)
     hints.put(DecodeHintType.POSSIBLE_FORMATS, formats)

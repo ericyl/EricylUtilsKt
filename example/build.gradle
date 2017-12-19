@@ -15,7 +15,7 @@ allOpen {
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion "26.0.2"
 
 
     defaultConfig {
@@ -47,12 +47,12 @@ dependencies {
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     testImplementation 'junit:junit:4.12'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
     implementation "org.jetbrains.anko:anko:$anko_version"
     implementation "com.android.support:appcompat-v7:26.1.0"
-    implementation "com.android.support:design:26.1.0"
+    implementation "com.android.support:design:$android_support_version"
     compile 'io.reactivex.rxjava2:rxkotlin:2.1.0'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'net.zetetic:android-database-sqlcipher:3.5.7@aar'

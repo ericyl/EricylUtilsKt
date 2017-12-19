@@ -17,9 +17,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorButtonNormal">?colorPrimary</item>
-        <item name="colorButtonActive">?colorPrimaryDark</item>
-        <item name="colorButtonInactive">@color/gray</item>
+        <!--<item name="colorButtonActive">?colorPrimaryDark</item>-->
+        <!--<item name="colorButtonInactive">@color/gray</item>-->
     </style>
 
     <style name="Base.AppTheme.NoActionBar" parent="Base.Theme.AppTheme">

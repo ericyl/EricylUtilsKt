@@ -5,7 +5,7 @@ import java.io.File
 import java.security.MessageDigest
 
 /**
- * Created by ericyl on 2017/9/22.
+ * @author ericyl
  */
 fun getStringMD5(str: String): String {
     val md5 = MessageDigest.getInstance("MD5")

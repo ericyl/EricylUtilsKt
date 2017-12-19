@@ -13,7 +13,7 @@ import org.jetbrains.anko.toast
 import java.io.File
 
 /**
- * Created by ericyl on 2017/7/24.
+ * @author ericyl
  */
 
 /**
@@ -41,7 +41,7 @@ fun ContextWrapper.openFile(providerName: String, filePath: String, mimeType: St
             startActivity(intent)
     } catch (e: ActivityNotFoundException) {
         toast(R.string.can_not_found_app)
-    } catch(e: Exception) {
+    } catch (e: Exception) {
         toast(R.string.open_file_failed)
     }
 

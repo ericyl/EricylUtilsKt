@@ -1,9 +1,16 @@
 package com.ericyl.utils.util
 
 /**
- * Created by ericyl on 2017/7/26.
+ * @author ericyl
  */
-fun <T, R1, R2> Array<T>.doIsOrNotEmptyAction(notEmptyAction: (Array<T>) -> R1, emptyAction: (Array<T>) -> R2) {
+
+fun <R1, R2> Boolean.doIsOrNotAction(action: () -> R2, notAction: () -> R1) {
+    if (this)
+        action()
+    else notAction()
+}
+
+fun <T, R1, R2> Array<T>.doIsOrNotEmptyAction(emptyAction: (Array<T>) -> R2, notEmptyAction: (Array<T>) -> R1) {
     if (isEmpty())
         emptyAction(this)
     else notEmptyAction(this)
@@ -22,8 +29,8 @@ fun <T, R> Array<T>.doNotEmptyAction(action: (Array<T>) -> R): Array<T> {
     return this
 }
 
-inline fun <reified T: Any>T.setByFiled(name: String, value: Any): T{
-    val field  = this.javaClass.getDeclaredField(name)
+inline fun <reified T : Any> T.setByFiled(name: String, value: Any): T {
+    val field = this.javaClass.getDeclaredField(name)
     field.isAccessible = true
     field.set(this, value)
     return this

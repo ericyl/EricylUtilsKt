@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.ContextWrapper
+import android.os.Build
 import android.provider.Settings
 import android.support.annotation.RequiresPermission
 import android.telephony.TelephonyManager
@@ -15,7 +16,7 @@ import java.io.UnsupportedEncodingException
 import java.util.*
 
 /**
- * Created by ericyl on 2017/7/26.
+ * @author ericyl
  */
 enum class IMSI(private val tag: String) {
     CMCC("中国移动"), CHINA_UNICOM("中国联通"), CHINA_TELECOM("中国电信");
@@ -47,7 +48,11 @@ fun ContextWrapper.getImsi(): IMSI? =
 fun Context.getDeviceUUID(): UUID? {
     var uuid: UUID? = null
     val telephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-    var deviceId = telephonyManager.deviceId
+    var deviceId =
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O)
+                telephonyManager.deviceId
+            else
+                telephonyManager.imei
 
     if (TextUtils.isEmpty(deviceId)) {
         val macStream = try {

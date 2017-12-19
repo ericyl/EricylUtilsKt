@@ -7,7 +7,7 @@ import android.view.View
 import com.ericyl.utils.example.R
 import com.ericyl.utils.example.data.*
 import com.ericyl.utils.example.utils.DATA_DATABASE_NAME
-import com.ericyl.utils.ui.BaseActivity
+import com.ericyl.utils.ui.activity.BaseActivity
 import com.ericyl.utils.util.getDeviceUUID
 import com.ericyl.utils.util.getRandomBytes
 import com.ericyl.utils.util.saveToKeyStore

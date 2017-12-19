@@ -5,7 +5,7 @@ import android.os.Message
 import android.os.SystemClock
 
 /**
- * Created by ericyl on 2017/9/21.
+ * @author ericyl
  */
 private const val COUNT_UP_TIMER_MSG = 0x1024
 

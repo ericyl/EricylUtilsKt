@@ -1,7 +1,8 @@
 package com.ericyl.utils.cryptographical.exception
 
 /**
- * Created by ericyl on 2017/7/31.
+ * @author ericyl
+ * 2017/7/31
  */
 class CryptoException : Exception {
     constructor() : super()

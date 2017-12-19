@@ -1,8 +1,8 @@
 package com.ericyl.utils.example
 
-import android.app.Application
+import com.ericyl.utils.BaseApplication
 
 /**
- * Created by ericyl on 2017/8/16.
+ * @author ericyl on 2017/8/16.
  */
-class ExampleApplication : Application()
+class ExampleApplication : BaseApplication()
