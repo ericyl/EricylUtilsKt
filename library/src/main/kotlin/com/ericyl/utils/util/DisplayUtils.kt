@@ -29,22 +29,6 @@ fun ContextWrapper.getScreenHeight(): Int {
     return resources.displayMetrics.heightPixels
 }
 
-fun dp2px(context: Context, dp: Float, density: Float = context.resources.displayMetrics.density): Float {
-    return dp * density + 0.5f * if (dp >= 0) 1 else -1
-}
-
-fun px2dp(context: Context, px: Float, density: Float = context.resources.displayMetrics.density): Float {
-    return px / density + 0.5f * if (px >= 0) 1 else -1
-}
-
-fun sp2px(context: Context, sp: Float, scaledDensity: Float = context.resources.displayMetrics.density): Float {
-    return sp * scaledDensity + 0.5f * if (sp >= 0) 1 else -1
-}
-
-fun px2sp(context: Context, px: Float, scaledDensity: Float = context.resources.displayMetrics.density): Float {
-    return px / scaledDensity + 0.5f * if (px >= 0) 1 else -1
-}
-
 /**
  * 获取当前屏幕旋转角度
  *

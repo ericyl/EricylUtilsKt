@@ -63,9 +63,8 @@ class NumberPickerPreference(context: Context, attrs: AttributeSet, defStyleAttr
 
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.layout_number_picker_dialog, null)
-
         numberPicker = view.findViewById(R.id.number_picker)
-
+        numberPicker
 //      Initialize state
         numberPicker.maxValue = max
         numberPicker.minValue = min

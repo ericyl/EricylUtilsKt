@@ -11,6 +11,7 @@ import com.ericyl.utils.example.R
 import com.ericyl.utils.ui.activity.BaseActivity
 import com.ericyl.utils.util.*
 import kotlinx.android.synthetic.main.activity_intents_utils.*
+import org.jetbrains.anko.act
 import org.jetbrains.anko.makeCall
 import org.jetbrains.anko.toast
 import java.io.File
@@ -52,8 +53,7 @@ class IntentUtilsActivity : BaseActivity() {
                                             Manifest.permission.WRITE_EXTERNAL_STORAGE,
                                             action = { e ->
                                                 Snackbar.make(btnMakeCall, R.string.please_allow_to_open_permission, Snackbar.LENGTH_SHORT).setAction(R.string.allow) {
-                                                    showLog(e)
-//                                                                    requestUsedPermissions(CODE_CALL_PHONE, e.toTypedArray(), action = {})
+                                                    requestUsedPermissions(CODE_CALL_PHONE, *e)
                                                 }.show()
                                             }
                                     )

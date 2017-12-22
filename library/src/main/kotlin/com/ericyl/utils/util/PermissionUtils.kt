@@ -11,16 +11,18 @@ import com.ericyl.utils.R
 /**
  * @author ericyl
  */
-fun ContextWrapper.checkPermission(permission: String) = ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
+fun ContextWrapper.checkPermission(permission: String) = grantPermission(ContextCompat.checkSelfPermission(this, permission))
 
 fun ContextWrapper.checkPermissions(vararg permissions: String): Array<String>? {
     return permissions.partition { checkPermission(it) }.second.toTypedArray()
 }
 
-fun Activity.requestUsedPermissions(requestCode: Int, vararg permissions: String, action: (permissions: List<String>) -> Unit) {
+fun Activity.requestUsedPermissions(requestCode: Int, vararg permissions: String, action: ((permissions: Array<out String>) -> Unit)? = null) {
     permissions.any { ActivityCompat.shouldShowRequestPermissionRationale(this, it) }.let {
-        if (it && permissions.isNotEmpty()) action(permissions.asList())
-        else ActivityCompat.requestPermissions(this, permissions, requestCode)
+        if (it && permissions.isNotEmpty() && action != null)
+            action(permissions)
+        else
+            ActivityCompat.requestPermissions(this, permissions, requestCode)
     }
 }
 

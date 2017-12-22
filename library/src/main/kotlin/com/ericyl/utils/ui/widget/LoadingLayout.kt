@@ -8,14 +8,12 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.TextView
 
 import com.ericyl.utils.R
 import com.ericyl.utils.annotation.LoadStatus
-import com.ericyl.utils.util.dp2px
+import kotlinx.android.synthetic.main.layout_loading.view.*
+import org.jetbrains.anko.dip
 
 class LoadingLayout(context: Context, attrs: AttributeSet, defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr) {
 
@@ -27,10 +25,6 @@ class LoadingLayout(context: Context, attrs: AttributeSet, defStyleAttr: Int = 0
     private var loadingMessage: String
     private var failedMessage: String
     private var finishMessage: String
-
-    private lateinit var pbLoading: ProgressBar
-    private lateinit var imgFailed: ImageView
-    private lateinit var tvMsg: TextView
 
     private var onLoadingClickListener: View.OnClickListener? = null
     private var onFailedClickListener: View.OnClickListener? = null
@@ -63,7 +57,7 @@ class LoadingLayout(context: Context, attrs: AttributeSet, defStyleAttr: Int = 0
 
     fun setShowFailedImage(showFailedImage: Boolean) {
         this.showFailedImage = showFailedImage
-        imgFailed.visibility = if (showFailedImage) View.VISIBLE else View.GONE
+        imgError.visibility = if (showFailedImage) View.VISIBLE else View.GONE
     }
 
     fun setOnLoadingClickListener(onLoadingClickListener: View.OnClickListener) {
@@ -96,17 +90,14 @@ class LoadingLayout(context: Context, attrs: AttributeSet, defStyleAttr: Int = 0
 
     private fun initView(context: Context) {
         gravity = Gravity.CENTER
-        val padding = dp2px(context, 8.0f, 0f).toInt()
+        val padding = dip(8.0f)
         setPadding(padding, padding, padding, padding)
         LayoutInflater.from(context).inflate(R.layout.layout_loading, this, true)
-        pbLoading = findViewById(R.id.pb_loading)
-        imgFailed = findViewById(R.id.img_error)
-        tvMsg = findViewById(R.id.tv_msg)
         pbLoading.visibility = View.GONE
-        imgFailed.visibility = View.GONE
+        imgError.visibility = View.GONE
         tvMsg.visibility = View.GONE
-        imgFailed.setImageDrawable(failedImage)
-        imgFailed.setColorFilter(failedImageColor)
+        imgError.setImageDrawable(failedImage)
+        imgError.setColorFilter(failedImageColor)
         setStatus(LoadStatus.LOADING)
     }
 
@@ -122,7 +113,7 @@ class LoadingLayout(context: Context, attrs: AttributeSet, defStyleAttr: Int = 0
     private fun showLoading() {
         if (showProgressBar)
             pbLoading.visibility = View.VISIBLE
-        imgFailed.visibility = View.GONE
+        imgError.visibility = View.GONE
         tvMsg.visibility = View.VISIBLE
         tvMsg.text = loadingMessage
         if (onLoadingClickListener != null)
@@ -134,7 +125,7 @@ class LoadingLayout(context: Context, attrs: AttributeSet, defStyleAttr: Int = 0
 
     private fun showFailed() {
         if (showFailedImage)
-            imgFailed.visibility = View.VISIBLE
+            imgError.visibility = View.VISIBLE
         pbLoading.visibility = View.GONE
         tvMsg.visibility = View.VISIBLE
         tvMsg.text = failedMessage
@@ -146,7 +137,7 @@ class LoadingLayout(context: Context, attrs: AttributeSet, defStyleAttr: Int = 0
     }
 
     private fun showFinish() {
-        imgFailed.visibility = View.GONE
+        imgError.visibility = View.GONE
         pbLoading.visibility = View.GONE
         tvMsg.visibility = View.VISIBLE
         tvMsg.text = finishMessage

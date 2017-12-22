@@ -12,9 +12,8 @@ import android.view.View
 import android.widget.ImageView
 
 import com.ericyl.utils.R
-import com.ericyl.utils.util.dp2px
-import com.ericyl.utils.util.px2sp
-import com.ericyl.utils.util.sp2px
+import org.jetbrains.anko.dip
+import org.jetbrains.anko.sp
 
 class CustomSearchView(context: Context, attrs: AttributeSet, defStyleAttr: Int = 0) : SearchView(context, attrs, defStyleAttr) {
 
@@ -30,19 +29,19 @@ class CustomSearchView(context: Context, attrs: AttributeSet, defStyleAttr: Int 
         val a = context.obtainStyledAttributes(attrs, R.styleable.CustomSearchView, defStyleAttr, R.style.defaultStyle_CustomSearchView)
 
         try {
-            var editTextSize = 16.0f
+            var editTextSize = sp(16.0f)
             if (a.hasValue(R.styleable.CustomSearchView_custom_editTextSize))
-                editTextSize = px2sp(context, a.getDimension(R.styleable.CustomSearchView_custom_editTextSize, sp2px(context, 16.0F, 0.0F)), 0.0F)
+                editTextSize = sp(a.getDimension(R.styleable.CustomSearchView_custom_editTextSize, 16.0f))
 
             val imgGo = a.getDrawable(R.styleable.CustomSearchView_custom_imgGo)
 
-            var goPaddingLeft = dp2px(context, 4.0F, 0.0F).toInt()
+            var goPaddingLeft = dip(4.0f)
             if (a.hasValue(R.styleable.CustomSearchView_custom_goPaddingLeft))
-                goPaddingLeft = a.getDimension(R.styleable.CustomSearchView_custom_goPaddingLeft, 4.0f).toInt()
+                goPaddingLeft = dip(a.getDimension(R.styleable.CustomSearchView_custom_goPaddingLeft, 4.0f))
 
-            var goPaddingRight = dp2px(context, 4.0F, 0.0F).toInt()
+            var goPaddingRight = dip(4.0f)
             if (a.hasValue(R.styleable.CustomSearchView_custom_goPaddingRight))
-                goPaddingRight = a.getDimension(R.styleable.CustomSearchView_custom_goPaddingRight, 4.0f).toInt()
+                goPaddingRight = dip(a.getDimension(R.styleable.CustomSearchView_custom_goPaddingRight, 4.0f))
 
             var searchPlateBackground = Color.TRANSPARENT
             if (a.hasValue(R.styleable.CustomSearchView_custom_searchPlateBackground))
@@ -53,7 +52,7 @@ class CustomSearchView(context: Context, attrs: AttributeSet, defStyleAttr: Int 
                 submitAreaBackground = a.getColor(R.styleable.CustomSearchView_custom_submitAreaBackground, Color.TRANSPARENT)
 
             searchAutoComplete = findViewById(android.support.v7.appcompat.R.id.search_src_text)
-            searchAutoComplete.textSize = editTextSize
+            searchAutoComplete.textSize = editTextSize.toFloat()
 
             isSubmitButtonEnabled = true
 
