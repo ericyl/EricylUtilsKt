@@ -1,5 +1,6 @@
 package com.ericyl.utils.util
 
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
@@ -7,6 +8,7 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 
 import java.io.File
 import java.util.ArrayList
@@ -85,3 +87,24 @@ fun Context.getPackageInfos(isSystem: Boolean = false): List<PackageInfo> {
 
 }
 
+/**
+ * Activity jump to other package activity
+ *
+ * @param packageName       other activity package name like{com.ericyl.demo}
+ * @param startActivityName other activity name like{com.ericyl.demo.DemoActivity}
+ * @param bundle            data bundle
+ * @param action            intent.action link{Intent.ACTION_*}
+ * @param flags             intent.flag link{Intent.ACTION_*}
+ * default{Intent.FLAG_ACTIVITY_NEW_TASK}
+ */
+fun Context.jumpActivity(packageName: String,
+                         startActivityName: String, bundle: Bundle? = null, action: String? = null, flags: Int = Intent.FLAG_ACTIVITY_NEW_TASK) {
+    val intent = Intent()
+    if (action != null)
+        intent.action = action
+    intent.flags = flags
+    intent.component = ComponentName(packageName, startActivityName)
+    if (bundle != null)
+        intent.putExtras(bundle)
+    startActivity(intent)
+}

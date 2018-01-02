@@ -2,11 +2,11 @@ package com.ericyl.utils.ui.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
 import android.view.View
 
 /**
- * @author ericyl
- * 2017/7/31
+ * @author ericyl on 2017/7/31
  */
 abstract class BaseActivity(private val showAction: Boolean = true) : AppCompatActivity(), View.OnClickListener {
 
@@ -18,5 +18,15 @@ abstract class BaseActivity(private val showAction: Boolean = true) : AppCompatA
     }
 
     abstract fun init(savedInstanceState: Bundle?)
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
 }
