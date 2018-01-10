@@ -20,4 +20,7 @@
     <string name="error">错误</string>
 
     <string name="more_than_99">99+</string>
+
+    <string name="cancel">取消</string>
+    <string name="ok">确定</string>
 </resources>

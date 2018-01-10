@@ -27,6 +27,8 @@ class ActionBadgeLayout(context: Context, attrs: AttributeSet, defStyleAttr: Int
     private lateinit var imgIcon: ImageView
     private lateinit var tvBadge: TextView
 
+    constructor(context: Context, attrs: AttributeSet) : this(context, attrs, R.style.defaultStyle_ActionBadgeLayout)
+
     init {
         val a = context.obtainStyledAttributes(attrs, R.styleable.ActionBadgeLayout, 0, R.style.defaultStyle_ActionBadgeLayout)
         try {

@@ -72,6 +72,8 @@ class LoadingLayout(context: Context, attrs: AttributeSet, defStyleAttr: Int = 0
         this.onFinishClickListener = onFinishClickListener
     }
 
+    constructor(context: Context, attrs: AttributeSet) : this(context, attrs, R.style.defaultStyle_LoadingLayout)
+
     init {
         val a = context.obtainStyledAttributes(attrs, R.styleable.LoadingLayout, defStyleAttr, R.style.defaultStyle_LoadingLayout)
         try {

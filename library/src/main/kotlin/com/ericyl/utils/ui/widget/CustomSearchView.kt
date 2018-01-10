@@ -13,25 +13,24 @@ import android.widget.ImageView
 
 import com.ericyl.utils.R
 import org.jetbrains.anko.dip
+import org.jetbrains.anko.px2sp
 import org.jetbrains.anko.sp
 
 class CustomSearchView(context: Context, attrs: AttributeSet, defStyleAttr: Int = 0) : SearchView(context, attrs, defStyleAttr) {
 
     private var searchAutoComplete: SearchView.SearchAutoComplete
 
-    private lateinit var searchViewController: ISearchViewController
+    var doCloseAction: (() -> Unit)? = null
 
-    fun setSearchController(searchViewController: ISearchViewController) {
-        this.searchViewController = searchViewController
-    }
+    constructor(context: Context, attrs: AttributeSet) : this(context, attrs, R.style.defaultStyle_CustomSearchView)
 
     init {
         val a = context.obtainStyledAttributes(attrs, R.styleable.CustomSearchView, defStyleAttr, R.style.defaultStyle_CustomSearchView)
 
         try {
-            var editTextSize = sp(16.0f)
+            var editTextSize = 16f
             if (a.hasValue(R.styleable.CustomSearchView_custom_editTextSize))
-                editTextSize = sp(a.getDimension(R.styleable.CustomSearchView_custom_editTextSize, 16.0f))
+                editTextSize = a.getDimension(R.styleable.CustomSearchView_custom_editTextSize, 16f)
 
             val imgGo = a.getDrawable(R.styleable.CustomSearchView_custom_imgGo)
 
@@ -52,7 +51,7 @@ class CustomSearchView(context: Context, attrs: AttributeSet, defStyleAttr: Int 
                 submitAreaBackground = a.getColor(R.styleable.CustomSearchView_custom_submitAreaBackground, Color.TRANSPARENT)
 
             searchAutoComplete = findViewById(android.support.v7.appcompat.R.id.search_src_text)
-            searchAutoComplete.textSize = editTextSize.toFloat()
+            searchAutoComplete.textSize = editTextSize
 
             isSubmitButtonEnabled = true
 
@@ -95,15 +94,13 @@ class CustomSearchView(context: Context, attrs: AttributeSet, defStyleAttr: Int 
 
     override fun dispatchKeyEventPreIme(event: KeyEvent): Boolean {
         when (event.keyCode) {
-            KeyEvent.KEYCODE_BACK ->
-                searchViewController.doClose()
+            KeyEvent.KEYCODE_BACK -> {
+                doCloseAction?.invoke()
+            }
         }
         return super.dispatchKeyEventPreIme(event)
     }
 
-    interface ISearchViewController {
-        fun doClose()
-    }
 
     companion object {
         private val CHECKED_STATE_SET = intArrayOf(android.R.attr.state_checked)
