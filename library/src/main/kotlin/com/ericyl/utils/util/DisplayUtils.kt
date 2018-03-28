@@ -21,11 +21,11 @@ import android.view.Surface
 //    return resources.displayMetrics.scaledDensity
 //}
 
-fun ContextWrapper.getScreenWidth(): Int {
+fun Context.getScreenWidth(): Int {
     return resources.displayMetrics.widthPixels
 }
 
-fun ContextWrapper.getScreenHeight(): Int {
+fun Context.getScreenHeight(): Int {
     return resources.displayMetrics.heightPixels
 }
 
@@ -64,7 +64,7 @@ fun Activity.lockActivity(degree: Int = getScreenRotation()) {
  *
  * @return is accelerometer rotation
  */
-fun ContextWrapper.isAccelerometerRotation(): Boolean {
+fun Context.isAccelerometerRotation(): Boolean {
     return Settings.System.getInt(contentResolver, Settings.System.ACCELEROMETER_ROTATION, 0) != 0
 }
 
@@ -73,6 +73,6 @@ fun ContextWrapper.isAccelerometerRotation(): Boolean {
  *
  * @return is landscape orientation
  */
-fun ContextWrapper.isLandscapeOrientation(): Boolean {
+fun Context.isLandscapeOrientation(): Boolean {
     return resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 }

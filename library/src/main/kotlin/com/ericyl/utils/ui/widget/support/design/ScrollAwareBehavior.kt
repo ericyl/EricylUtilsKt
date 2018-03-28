@@ -48,21 +48,21 @@ class ScrollAwareBehavior(context: Context, attrs: AttributeSet) : CoordinatorLa
     private fun animateIn(view: View) {
         ViewCompat.animate(view).translationY(0f)
                 .setInterpolator(INTERPOLATOR).withLayer().setListener(object : ViewPropertyAnimatorListener {
-            override fun onAnimationEnd(view: View) {
-                this@ScrollAwareBehavior.isAnimate = false
-            }
+                    override fun onAnimationEnd(view: View) {
+                        this@ScrollAwareBehavior.isAnimate = false
+                    }
 
-            override fun onAnimationCancel(view: View) {
-                this@ScrollAwareBehavior.isAnimate = false
-            }
+                    override fun onAnimationCancel(view: View) {
+                        this@ScrollAwareBehavior.isAnimate = false
+                    }
 
-            override fun onAnimationStart(view: View) {
-                view.visibility = View.VISIBLE
-                this@ScrollAwareBehavior.isAnimate = true
-            }
+                    override fun onAnimationStart(view: View) {
+                        view.visibility = View.VISIBLE
+                        this@ScrollAwareBehavior.isAnimate = true
+                    }
 
 
-        }).start()
+                }).start()
     }
 
     private fun getMarginBottom(view: View): Int {

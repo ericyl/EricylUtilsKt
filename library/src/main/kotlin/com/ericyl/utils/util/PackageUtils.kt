@@ -20,7 +20,7 @@ fun Context.installApk(filePath: String): Boolean {
     if (!filePath.isEmpty())
         file = File(filePath)
     return if (file != null && file.exists() && file.isFile) {
-        intent.setDataAndType(Uri.parse("file://" + filePath),
+        intent.setDataAndType(Uri.parse("file://$filePath"),
                 "application/vnd.android.package-archive")
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
@@ -29,7 +29,7 @@ fun Context.installApk(filePath: String): Boolean {
 }
 
 fun Context.uninstallApk(packageName: String) {
-    val packageURI = Uri.parse("package:" + packageName)
+    val packageURI = Uri.parse("package:$packageName")
     val uninstallIntent = Intent(Intent.ACTION_DELETE, packageURI)
     startActivity(uninstallIntent)
 }

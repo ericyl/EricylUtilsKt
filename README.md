@@ -1,7 +1,7 @@
 # EricylUtils for Kotlin
-开发环境: Android Studio 3.0 EAP
+开发环境: Android Studio 3.1
 
-刚开始接触Kotlin, 故代码可能很糟糕，项目会抽时间一点一点完善
+刚开始接触Kotlin, 代码可能很糟糕，项目会抽时间一点一点完善
 
 ### 主要功能:
 Android 控件及公共类的封装

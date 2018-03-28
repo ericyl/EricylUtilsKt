@@ -21,8 +21,6 @@ class CircleTextView(context: Context, attrs: AttributeSet, defStyleAttr: Int = 
     private var backgroundColor: Int
     private var isSingleText: Boolean
 
-    constructor(context: Context, attrs: AttributeSet) : this(context, attrs, R.style.defaultStyle_CircleTextView)
-
     init {
         val a = context.obtainStyledAttributes(attrs, R.styleable.CircleTextView, defStyleAttr, R.style.defaultStyle_CircleTextView)
         try {

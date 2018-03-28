@@ -27,8 +27,6 @@ class ActionBadgeLayout(context: Context, attrs: AttributeSet, defStyleAttr: Int
     private lateinit var imgIcon: ImageView
     private lateinit var tvBadge: TextView
 
-    constructor(context: Context, attrs: AttributeSet) : this(context, attrs, R.style.defaultStyle_ActionBadgeLayout)
-
     init {
         val a = context.obtainStyledAttributes(attrs, R.styleable.ActionBadgeLayout, 0, R.style.defaultStyle_ActionBadgeLayout)
         try {
@@ -49,7 +47,7 @@ class ActionBadgeLayout(context: Context, attrs: AttributeSet, defStyleAttr: Int
         if (icon != -1)
             imgIcon.setImageResource(icon)
         val drawable = ContextCompat.getDrawable(context, R.drawable.drawable_tv_badge_rectangle)
-        DrawableCompat.setTintList(drawable, ContextCompat.getColorStateList(context, badgeColor))
+        DrawableCompat.setTintList(drawable!!, ContextCompat.getColorStateList(context, badgeColor))
         tvBadge.backgroundDrawable = drawable
     }
 

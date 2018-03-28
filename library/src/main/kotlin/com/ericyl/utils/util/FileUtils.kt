@@ -10,6 +10,8 @@ import java.text.DecimalFormat
 fun getFolderSize(file: File): Long {
     var size: Long = 0
     val fileList = file.listFiles()
+    if (fileList == null || fileList.isEmpty())
+        return 0
     for (i in fileList.indices) {
         size = if (fileList[i].isDirectory) {
             size + getFolderSize(fileList[i])
@@ -23,20 +25,20 @@ fun getFolderSize(file: File): Long {
 }
 
 fun deleteFiles(file: File) {
-    if (file.exists()) {
-        if (file.isFile)
+    if (!file.exists())
+        return
+    if (file.isFile)
+        file.delete()
+    else if (file.isDirectory) {
+        val childFiles = file.listFiles()
+        if (childFiles == null || childFiles.isEmpty()) {
             file.delete()
-        else if (file.isDirectory) {
-            val childFiles = file.listFiles()
-            if (childFiles == null || childFiles.isEmpty()) {
-                file.delete()
-                return
-            }
-            for (childFile in childFiles) {
-                deleteFiles(childFile)
-            }
-            file.delete()
+            return
         }
+        for (childFile in childFiles) {
+            deleteFiles(childFile)
+        }
+        file.delete()
     }
 }
 

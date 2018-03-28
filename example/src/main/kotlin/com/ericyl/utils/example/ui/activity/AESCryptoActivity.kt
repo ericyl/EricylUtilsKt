@@ -49,8 +49,8 @@ class AESCryptoActivity : BaseActivity(false) {
                 create(SingleOnSubscribe<AESData> { e ->
                     SQLiteDatabase.loadLibs(this)
                     try {
-                        val database = SQLiteDatabase.openDatabase(this.getDatabasePath(DATA_DATABASE_NAME + ".db").absolutePath, "test", null, SQLiteDatabase.OPEN_READONLY)
-                        val cursor = database.query(TABLE_NAME, null, NAME + " = ? ", arrayOf("example.keystore"), null, null, null)
+                        val database = SQLiteDatabase.openDatabase(this.getDatabasePath("$DATA_DATABASE_NAME.db").absolutePath, "test", null, SQLiteDatabase.OPEN_READONLY)
+                        val cursor = database.query(TABLE_NAME, null, "$NAME = ? ", arrayOf("example.keystore"), null, null, null)
                         database.close()
                         cursor.use {
                             if (it != null && it.moveToFirst()) {

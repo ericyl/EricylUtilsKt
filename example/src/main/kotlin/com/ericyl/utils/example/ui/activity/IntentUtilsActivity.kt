@@ -11,7 +11,6 @@ import com.ericyl.utils.example.R
 import com.ericyl.utils.ui.activity.BaseActivity
 import com.ericyl.utils.util.*
 import kotlinx.android.synthetic.main.activity_intents_utils.*
-import org.jetbrains.anko.act
 import org.jetbrains.anko.makeCall
 import org.jetbrains.anko.toast
 import java.io.File

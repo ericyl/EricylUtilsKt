@@ -52,8 +52,8 @@ dependencies {
     implementation "org.jetbrains.anko:anko:$anko_version"
     implementation "com.android.support:appcompat-v7:$android_support_version"
     implementation "com.android.support:design:$android_support_version"
-    compile 'io.reactivex.rxjava2:rxkotlin:2.1.0'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'net.zetetic:android-database-sqlcipher:3.5.7@aar'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'net.zetetic:android-database-sqlcipher:3.5.7@aar'
     implementation project(':library')
 }

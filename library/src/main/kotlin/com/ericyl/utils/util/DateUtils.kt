@@ -1,10 +1,7 @@
 package com.ericyl.utils.util
 
-import android.annotation.SuppressLint
 import android.content.Context
 import com.ericyl.utils.R
-import java.text.SimpleDateFormat
-import java.util.*
 
 /**
  * @author ericyl
