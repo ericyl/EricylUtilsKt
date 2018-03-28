@@ -44,7 +44,7 @@ class BaseUncaughtExceptionHandler(private val path: String, private val context
         for (field in fields) {
             try {
                 field.isAccessible = true
-                _deviceCrashInfo.put(field.name, field.toString())
+                _deviceCrashInfo[field.name] = field.toString()
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -92,9 +92,9 @@ class BaseUncaughtExceptionHandler(private val path: String, private val context
     }
 
     companion object {
-        private val VERSION_NAME = "VERSIONNAME"
-        private val VERSION_CODE = "VERSIONCODE"
-        private val STACK_TRACE = "STACK_TRACE"
-        private val CRASH_REPORTER_EXTENSION = ".crs"
+        private const val VERSION_NAME = "VERSIONNAME"
+        private const val VERSION_CODE = "VERSIONCODE"
+        private const val STACK_TRACE = "STACK_TRACE"
+        private const val CRASH_REPORTER_EXTENSION = ".crs"
     }
 }

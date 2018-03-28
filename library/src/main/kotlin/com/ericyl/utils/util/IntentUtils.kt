@@ -2,6 +2,7 @@ package com.ericyl.utils.util
 
 import android.app.Activity
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
 import android.net.Uri
@@ -24,7 +25,7 @@ import java.io.File
  * @return open successful or failed
  */
 @JvmOverloads
-fun ContextWrapper.openFile(providerName: String, filePath: String, mimeType: String? = null, isChoose: Boolean = true) {
+fun Context.openFile(providerName: String, filePath: String, mimeType: String? = null, isChoose: Boolean = true) {
     try {
         val intent = Intent().setAction(Intent.ACTION_VIEW).addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
 
