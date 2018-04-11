@@ -36,33 +36,26 @@ inline fun <reified T> T.showLog(message: Any?, level: Int = Log.DEBUG): Int? {
 fun <P1, P2, P3, R> Function3<P1, P2, P3, R>.getLog(p1: P1, p2: P2) = fun(p3: P3) = this(p1, p2, p3)
 
 fun log(tag: String, level: Int, message: Any?): Int? {
-    return when (message) {
-        is String -> when (level) {
-            Log.DEBUG -> Log.d(tag, message)
-            Log.ERROR -> Log.e(tag, message)
-            Log.VERBOSE -> Log.v(tag, message)
-            Log.ASSERT -> Log.wtf(tag, message)
-            Log.INFO -> Log.i(tag, message)
-            Log.WARN -> Log.w(tag, message)
-            else -> null
-        }
-        is Throwable -> when (level) {
-            Log.DEBUG -> Log.d(tag, "${message.message}", message)
-            Log.ERROR -> Log.e(tag, "${message.message}", message)
-            Log.VERBOSE -> Log.v(tag, "${message.message}", message)
-            Log.ASSERT -> Log.wtf(tag, "${message.message}", message)
-            Log.INFO -> Log.i(tag, "${message.message}", message)
-            Log.WARN -> Log.w(tag, "${message.message}", message)
-            else -> null
-        }
-        else -> when (level) {
-            Log.DEBUG -> Log.d(tag, "$message")
-            Log.ERROR -> Log.e(tag, "$message")
-            Log.VERBOSE -> Log.v(tag, "$message")
-            Log.ASSERT -> Log.wtf(tag, "$message")
-            Log.INFO -> Log.i(tag, "$message")
-            Log.WARN -> Log.w(tag, "$message")
-            else -> null
-        }
+
+    return when (level) {
+        Log.DEBUG -> showLog(message, tag, Log::d, Log::d)
+        Log.ERROR -> showLog(message, tag, Log::e, Log::e)
+        Log.VERBOSE -> showLog(message, tag, Log::v, Log::v)
+        Log.ASSERT -> showLog(message, tag, Log::wtf, Log::wtf)
+        Log.INFO -> showLog(message, tag, Log::i, Log::i)
+        Log.WARN -> showLog(message, tag, Log::w, Log::w)
+        else -> null
     }
+}
+
+private fun showMessage(message: Any?): String {
+    return when (message) {
+        is String -> message
+        is Throwable -> "${message.message}"
+        else -> "$message"
+    }
+}
+
+private fun showLog(message: Any?, tag: String, action1: (tag: String, message: String, tr: Throwable) -> Int?, action2: (tag: String, message: String) -> Int?): Int? {
+    return if (message is Throwable) action1.invoke(tag, showMessage(message), message) else action2.invoke(tag, showMessage(message))
 }
