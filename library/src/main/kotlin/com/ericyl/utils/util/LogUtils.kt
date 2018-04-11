@@ -29,7 +29,8 @@ inline fun <reified T> T.showWarnLog(message: Any?): Int? {
     return showLog(message, Log.WARN)
 }
 
-inline fun <reified T> T.showLog(message: Any?, level: Int = Log.DEBUG): Int? {
+//It's a joke
+inline fun <reified T> T.showLog(message: Any? = "Di lin Di lin. the message is $this", level: Int = Log.DEBUG): Int? {
     return ::log.getLog(T::class.java.simpleName, level)(message)
 }
 
