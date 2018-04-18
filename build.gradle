@@ -1,11 +1,12 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.android_support_version = '27.1.0'
+    ext.android_support_version = '27.1.1'
     ext.kotlin_version = '1.2.31'
-    ext.anko_version = '0.10.1'
+    ext.anko_version = '0.10.4'
     ext.zxing_version = '3.3.0'
-    ext.richtext_version = '3.0.4'
+    ext.richtext_version = '3.0.7'
+    ext.constraint_layout_version = '1.1.0'
 
     repositories {
         google()
@@ -20,6 +21,10 @@ buildscript {
         // in the individual module build.gradle files
         classpath "org.jetbrains.kotlin:kotlin-noarg:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
+
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0"
+        classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.16"
     }
 }
 
