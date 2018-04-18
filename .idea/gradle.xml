@@ -8,7 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/ericylutils" />
+            <option value="$PROJECT_DIR$/ericylutilskt" />
             <option value="$PROJECT_DIR$/example" />
           </set>
         </option>

@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EricylUtilsKt.iml" filepath="$PROJECT_DIR$/EricylUtilsKt.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ericylutils/ericylutils.iml" filepath="$PROJECT_DIR$/ericylutils/ericylutils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ericylutilskt/ericylutilskt.iml" filepath="$PROJECT_DIR$/ericylutilskt/ericylutilskt.iml" />
       <module fileurl="file://$PROJECT_DIR$/example/example.iml" filepath="$PROJECT_DIR$/example/example.iml" />
     </modules>
   </component>
