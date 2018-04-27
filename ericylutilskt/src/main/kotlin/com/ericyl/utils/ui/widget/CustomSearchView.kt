@@ -16,13 +16,13 @@ import org.jetbrains.anko.dip
 import org.jetbrains.anko.px2sp
 import org.jetbrains.anko.sp
 
-class CustomSearchView(context: Context, attrs: AttributeSet, defStyleAttr: Int = 0) : SearchView(context, attrs, defStyleAttr) {
+class CustomSearchView(context: Context, attrs: AttributeSet, defStyleAttr: Int) : SearchView(context, attrs, defStyleAttr) {
 
     private var searchAutoComplete: SearchView.SearchAutoComplete
 
     var doCloseAction: (() -> Unit)? = null
 
-    constructor(context: Context, attrs: AttributeSet) : this(context, attrs, R.style.defaultStyle_CustomSearchView)
+    constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0)
 
     init {
         val a = context.obtainStyledAttributes(attrs, R.styleable.CustomSearchView, defStyleAttr, R.style.defaultStyle_CustomSearchView)

@@ -1,8 +1,10 @@
 package com.ericyl.utils.ui.widget
 
 import android.content.Context
+import android.support.annotation.AttrRes
 import android.support.annotation.ColorRes
 import android.support.annotation.DrawableRes
+import android.support.annotation.StyleRes
 import android.support.v4.content.ContextCompat
 import android.support.v4.graphics.drawable.DrawableCompat
 import android.text.TextUtils
@@ -17,7 +19,9 @@ import com.ericyl.utils.R
 import org.jetbrains.anko.backgroundDrawable
 
 
-class ActionBadgeLayout(context: Context, attrs: AttributeSet, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
+class ActionBadgeLayout(context: Context, attrs: AttributeSet, defStyleAttr: Int) : FrameLayout(context, attrs, defStyleAttr) {
+
+    constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0)
 
     @DrawableRes
     private var icon: Int
@@ -28,7 +32,7 @@ class ActionBadgeLayout(context: Context, attrs: AttributeSet, defStyleAttr: Int
     private lateinit var tvBadge: TextView
 
     init {
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ActionBadgeLayout, 0, R.style.defaultStyle_ActionBadgeLayout)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.ActionBadgeLayout, defStyleAttr, R.style.defaultStyle_ActionBadgeLayout)
         try {
             icon = a.getResourceId(R.styleable.ActionBadgeLayout_icon, -1)
             badgeColor = a.getResourceId(R.styleable.ActionBadgeLayout_badgeColor, R.attr.colorPrimary)

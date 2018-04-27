@@ -5,10 +5,12 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Environment
 import android.support.design.widget.Snackbar
+import android.view.Menu
 import android.view.View
 import com.ericyl.utils.example.BuildConfig
 import com.ericyl.utils.example.R
 import com.ericyl.utils.ui.activity.BaseActivity
+import com.ericyl.utils.ui.widget.ActionBadgeLayout
 import com.ericyl.utils.util.*
 import kotlinx.android.synthetic.main.activity_intents_utils.*
 import org.jetbrains.anko.makeCall
@@ -32,6 +34,14 @@ class IntentUtilsActivity : BaseActivity(), View.OnClickListener {
         btnChooseApp.setOnClickListener(this)
         btnOpenGallery.setOnClickListener(this)
         btnMakeCall.setOnClickListener(this)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_utils, menu)
+        val menuItem = menu.findItem(R.id.action_extension)
+        val actionBadgeLayout = menuItem.actionView as ActionBadgeLayout
+        actionBadgeLayout.setText("1000")
+        return super.onCreateOptionsMenu(menu)
     }
 
 

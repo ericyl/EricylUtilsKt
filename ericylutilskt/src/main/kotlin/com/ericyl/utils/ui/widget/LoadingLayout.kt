@@ -15,7 +15,7 @@ import com.ericyl.utils.annotation.LoadStatus
 import kotlinx.android.synthetic.main.layout_loading.view.*
 import org.jetbrains.anko.dip
 
-class LoadingLayout(context: Context, attrs: AttributeSet, defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr) {
+class LoadingLayout(context: Context, attrs: AttributeSet, defStyleAttr: Int) : LinearLayout(context, attrs, defStyleAttr) {
 
     @ColorInt
     private var failedImageColor: Int
@@ -72,7 +72,7 @@ class LoadingLayout(context: Context, attrs: AttributeSet, defStyleAttr: Int = 0
         this.onFinishClickListener = onFinishClickListener
     }
 
-    constructor(context: Context, attrs: AttributeSet) : this(context, attrs, R.style.defaultStyle_LoadingLayout)
+    constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0)
 
     init {
         val a = context.obtainStyledAttributes(attrs, R.styleable.LoadingLayout, defStyleAttr, R.style.defaultStyle_LoadingLayout)

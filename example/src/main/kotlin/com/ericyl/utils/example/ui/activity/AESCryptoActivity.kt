@@ -3,6 +3,7 @@ package com.ericyl.utils.example.ui.activity
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Base64
+import android.view.Menu
 import android.view.View
 import com.ericyl.utils.example.R
 import com.ericyl.utils.example.data.*

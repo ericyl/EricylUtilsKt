@@ -15,7 +15,9 @@ import android.util.AttributeSet
 import com.ericyl.utils.R
 import com.ericyl.utils.util.randomColor
 
-class CircleTextView(context: Context, attrs: AttributeSet, defStyleAttr: Int = 0) : AppCompatTextView(context, attrs, defStyleAttr) {
+class CircleTextView(context: Context, attrs: AttributeSet, defStyleAttr: Int) : AppCompatTextView(context, attrs, defStyleAttr) {
+
+    constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0)
 
     @ColorInt
     private var backgroundColor: Int

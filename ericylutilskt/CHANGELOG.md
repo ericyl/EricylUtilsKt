@@ -26,3 +26,6 @@
 ### 0.0.6
 * 删除 BaseActivity `View.OnClickListener`接口
 * 修改 CommonUtils `setByFiled` 方法
+
+### 0.0.7
+* 修改 widget 包下的构造方法
