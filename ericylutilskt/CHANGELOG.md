@@ -19,3 +19,10 @@
 
 ### 0.0.4
 * 剔除 Application 混淆
+
+### 0.0.5
+* 修改 0.0.4 混淆BUG
+
+### 0.0.6
+* 删除 BaseActivity `View.OnClickListener`接口
+* 修改 CommonUtils `setByFiled` 方法

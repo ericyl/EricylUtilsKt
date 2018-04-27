@@ -57,7 +57,7 @@
 #-----------------------------------------------------------------------
 
 # Android Suuort
--keepclassmembernames class * extends android.app.Application { *; }
+-keep class * extends android.app.Application { *; }
 
 -keepclassmembernames class * extends android.app.Activity {
     public void *(android.view.View);

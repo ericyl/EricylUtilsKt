@@ -8,7 +8,7 @@ import android.view.View
 /**
  * @author ericyl on 2017/7/31
  */
-abstract class BaseActivity(private val showAction: Boolean = true) : AppCompatActivity(), View.OnClickListener {
+abstract class BaseActivity(private val showAction: Boolean = true) : AppCompatActivity() {
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
