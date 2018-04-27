@@ -17,7 +17,7 @@ import java.io.File
 
 private const val CODE_CALL_PHONE = 1
 
-class IntentUtilsActivity : BaseActivity() {
+class IntentUtilsActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var fileName: String
 

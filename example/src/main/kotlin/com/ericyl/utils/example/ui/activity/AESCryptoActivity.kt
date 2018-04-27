@@ -21,7 +21,7 @@ import net.sqlcipher.database.SQLiteDatabase
 import org.jetbrains.anko.toast
 import javax.crypto.SecretKey
 
-class AESCryptoActivity : BaseActivity(false) {
+class AESCryptoActivity : BaseActivity(false), View.OnClickListener {
 
     private lateinit var secretKey: SecretKey
 
