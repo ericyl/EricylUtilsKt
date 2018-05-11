@@ -36,3 +36,6 @@
 ### 0.0.9
 * 更新`CustomSearchView`代码
 * 更新 kotlin 版本号
+
+### 0.0.10
+* 更新 `VectorDrawableUtils` 代码
