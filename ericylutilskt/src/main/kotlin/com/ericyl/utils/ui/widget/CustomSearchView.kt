@@ -28,9 +28,9 @@ class CustomSearchView(context: Context, attrs: AttributeSet, defStyleAttr: Int)
         val a = context.obtainStyledAttributes(attrs, R.styleable.CustomSearchView, defStyleAttr, R.style.defaultStyle_CustomSearchView)
 
         try {
-            var editTextSize = 16f
+            var editTextSize = sp(16f)
             if (a.hasValue(R.styleable.CustomSearchView_custom_editTextSize))
-                editTextSize = a.getDimension(R.styleable.CustomSearchView_custom_editTextSize, 16f)
+                editTextSize = a.getDimension(R.styleable.CustomSearchView_custom_editTextSize, sp(16f).toFloat()).toInt()
 
             val imgGo = a.getDrawable(R.styleable.CustomSearchView_custom_imgGo)
 
@@ -51,7 +51,7 @@ class CustomSearchView(context: Context, attrs: AttributeSet, defStyleAttr: Int)
                 submitAreaBackground = a.getColor(R.styleable.CustomSearchView_custom_submitAreaBackground, Color.TRANSPARENT)
 
             searchAutoComplete = findViewById(android.support.v7.appcompat.R.id.search_src_text)
-            searchAutoComplete.textSize = editTextSize
+            searchAutoComplete.textSize = editTextSize.toFloat()
 
             isSubmitButtonEnabled = true
 

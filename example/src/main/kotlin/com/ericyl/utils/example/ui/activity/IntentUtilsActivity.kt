@@ -27,6 +27,7 @@ class IntentUtilsActivity : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intents_utils)
         fileName = intent.getStringExtra("FILE_NAME") ?: "IMG_1.jpg"
+        showLog("test")
 
     }
 
