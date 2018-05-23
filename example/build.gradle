@@ -42,7 +42,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -55,6 +55,6 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     implementation 'net.zetetic:android-database-sqlcipher:3.5.9@aar'
-//    implementation project(':ericylutilskt')
-    implementation "com.ericyl.utils:ericylutilskt:0.0.8"
+    //    implementation project(':ericylutilskt')
+    implementation project(':ericylutilskt')
 }

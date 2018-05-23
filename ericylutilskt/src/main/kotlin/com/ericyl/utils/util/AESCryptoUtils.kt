@@ -53,6 +53,7 @@ private fun getSecretKey(password: String): SecretKey {
 fun ContextWrapper.saveToKeyStore(key: SecretKey, fileName: String, storePwd: String, entryAlias: String, entryPwd: String, type: String = KeyStore.getDefaultType()) {
     try {
         val keyStore = KeyStore.getInstance(type)
+        keyStore.load(null)
         val secretKeyEntry = KeyStore.SecretKeyEntry(key)
         keyStore.setEntry(entryAlias, secretKeyEntry, KeyStore.PasswordProtection(entryPwd.toCharArray()))
         val fos = FileOutputStream("${getExternalFilesDir("file")}${File.separator}$fileName")
@@ -80,16 +81,16 @@ fun ContextWrapper.readSecretKeyFromAssets(fileName: String, storePwd: String, e
 
 fun readSecretKey(fis: InputStream, storePwd: String, entryAlias: String, entryPwd: String, type: String = KeyStore.getDefaultType()): SecretKey {
     fis.use {
-        val keyStore = KeyStore.getInstance(type);
+        val keyStore = KeyStore.getInstance(type)
         keyStore.load(fis, storePwd.toCharArray())
         val secretKeyEntry = keyStore.getEntry(entryAlias, KeyStore.PasswordProtection(entryPwd.toCharArray())) as KeyStore.SecretKeyEntry
         return secretKeyEntry.secretKey
     }
 }
 
-fun encrypt(secretKey: SecretKey, iv: ByteArray, originalText: String) = Base64.encode(AESCryptoImpl.create(AESCryptoKey(secretKey).getKey().encoded, iv).encrypt(originalText.toByteArray(charset("UTF-8"))), Base64.NO_WRAP)
+fun encrypt(secretKey: SecretKey, iv: ByteArray, originalText: String) = Base64.encodeToString(AESCryptoImpl.create(AESCryptoKey(secretKey).getKey().encoded, iv).encrypt(originalText.toByteArray(charset("UTF-8"))), Base64.NO_WRAP)
 
-fun encrypt(key: ByteArray, iv: ByteArray, originalText: String) = Base64.encode(AESCryptoImpl.create(key, iv).encrypt(originalText.toByteArray(charset("UTF-8"))), Base64.NO_WRAP)
+fun encrypt(key: ByteArray, iv: ByteArray, originalText: String) = Base64.encodeToString(AESCryptoImpl.create(key, iv).encrypt(originalText.toByteArray(charset("UTF-8"))), Base64.NO_WRAP)
 
 fun decrypt(secretKey: SecretKey, iv: ByteArray, cipherText: String) = String(AESCryptoImpl.create(secretKey.encoded, iv).decrypt(Base64.decode(cipherText, Base64.NO_WRAP)), charset("UTF-8"))
 

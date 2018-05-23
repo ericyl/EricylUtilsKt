@@ -56,6 +56,20 @@
             android:layout_height="wrap_content"
             android:text="@string/save_key" />
 
+
+        <Button
+            android:id="@+id/btnSaveKeyStore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/save_key_store" />
+
+
+        <Button
+            android:id="@+id/btnBase64"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/save_key_store" />
+
     </LinearLayout>
 
 

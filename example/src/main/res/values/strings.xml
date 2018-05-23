@@ -17,4 +17,7 @@
     <string name="decrypt">解密</string>
     <string name="save_key">保存密钥</string>
     <string name="search">搜索</string>
+    <string name="save_key_store">保存密钥商店</string>
+    <string name="source_text_is_null">原文为空</string>
+    <string name="cipher_text_is_null">密文为空</string>
 </resources>

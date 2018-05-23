@@ -102,7 +102,7 @@
         <item name="showProgressBar">true</item>
         <item name="loadingMessage">@string/loading</item>
         <item name="showFailedImage">false</item>
-        <item name="failedImage">@drawable/ic_warning_white_24dp</item>
+        <item name="failedImage">@drawable/ic_baseline_error_24px</item>
         <item name="failedImageColor">?attr/colorPrimary</item>
         <item name="failedMessage">@string/load_error</item>
         <item name="finishMessage">@string/load_finish</item>

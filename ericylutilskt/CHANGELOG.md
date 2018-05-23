@@ -39,3 +39,6 @@
 
 ### 0.0.10
 * 更新 `VectorDrawableUtils` 代码
+
+### 0.0.11
+* 修改 AESCryptoUtils bug
