@@ -42,3 +42,6 @@
 
 ### 0.0.11
 * 修改 AESCryptoUtils bug
+
+### 0.0.12
+* 更新 CustomSearchView 代码

@@ -20,4 +20,5 @@
     <string name="save_key_store">保存密钥商店</string>
     <string name="source_text_is_null">原文为空</string>
     <string name="cipher_text_is_null">密文为空</string>
+    <string name="title_activity_search">SearchActivity</string>
 </resources>

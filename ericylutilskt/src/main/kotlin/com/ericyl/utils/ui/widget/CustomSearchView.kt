@@ -51,7 +51,7 @@ class CustomSearchView(context: Context, attrs: AttributeSet, defStyleAttr: Int)
                 submitAreaBackground = a.getColor(R.styleable.CustomSearchView_custom_submitAreaBackground, Color.TRANSPARENT)
 
             searchAutoComplete = findViewById(android.support.v7.appcompat.R.id.search_src_text)
-            searchAutoComplete.textSize = editTextSize.toFloat()
+            searchAutoComplete.textSize = px2sp(editTextSize)
 
             isSubmitButtonEnabled = true
 
@@ -83,7 +83,7 @@ class CustomSearchView(context: Context, attrs: AttributeSet, defStyleAttr: Int)
         val baseColor = AppCompatResources.getColorStateList(
                 context, value.resourceId)
         if (!context.theme.resolveAttribute(
-                android.support.v7.appcompat.R.attr.colorPrimary, value, true)) {
+                        android.support.v7.appcompat.R.attr.colorPrimary, value, true)) {
             return null
         }
         val colorPrimary = value.data
