@@ -10,7 +10,7 @@ import java.util.*
  */
 val hints = fun(formats: List<BarcodeFormat>): MutableMap<DecodeHintType, Any> {
     val hints: MutableMap<DecodeHintType, Any> = EnumMap<DecodeHintType, Any>(DecodeHintType::class.java)
-    hints.put(DecodeHintType.POSSIBLE_FORMATS, formats)
+    hints[DecodeHintType.POSSIBLE_FORMATS] = formats
     return hints
 }
 
@@ -20,7 +20,7 @@ fun MutableMap<DecodeHintType, Any>.addHints(localHints: Map<DecodeHintType, Any
 }
 
 fun MutableMap<DecodeHintType, Any>.addHints(hintType: DecodeHintType, hint: Any): MutableMap<DecodeHintType, Any> {
-    this.put(hintType, hint)
+    this[hintType] = hint
     return this
 }
 

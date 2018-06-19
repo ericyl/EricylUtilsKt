@@ -1,6 +1,6 @@
 package com.ericyl.utils.util
 
-import android.content.ContextWrapper
+import android.content.Context
 import android.util.Base64
 import com.ericyl.utils.cryptographical.aes.AESCryptoImpl
 import com.ericyl.utils.cryptographical.aes.AESCryptoKey
@@ -50,7 +50,7 @@ private fun getSecretKey(password: String): SecretKey {
     }
 }
 
-fun ContextWrapper.saveToKeyStore(key: SecretKey, fileName: String, storePwd: String, entryAlias: String, entryPwd: String, type: String = KeyStore.getDefaultType()) {
+fun Context.saveToKeyStore(key: SecretKey, fileName: String, storePwd: String, entryAlias: String, entryPwd: String, type: String = KeyStore.getDefaultType()) {
     try {
         val keyStore = KeyStore.getInstance(type)
         keyStore.load(null)
@@ -65,7 +65,7 @@ fun ContextWrapper.saveToKeyStore(key: SecretKey, fileName: String, storePwd: St
     }
 }
 
-fun ContextWrapper.saveKey(key: ByteArray, fileName: String) {
+fun Context.saveKey(key: ByteArray, fileName: String) {
     try {
         val fos = FileOutputStream("${getExternalFilesDir("file")}${File.separator}$fileName")
         fos.use {
@@ -76,7 +76,7 @@ fun ContextWrapper.saveKey(key: ByteArray, fileName: String) {
     }
 }
 
-fun ContextWrapper.readSecretKeyFromAssets(fileName: String, storePwd: String, entryAlias: String, entryPwd: String, type: String = KeyStore.getDefaultType()) = readSecretKey(resources.assets.open(fileName), storePwd, entryAlias, entryPwd, type)
+fun Context.readSecretKeyFromAssets(fileName: String, storePwd: String, entryAlias: String, entryPwd: String, type: String = KeyStore.getDefaultType()) = readSecretKey(resources.assets.open(fileName), storePwd, entryAlias, entryPwd, type)
 
 
 fun readSecretKey(fis: InputStream, storePwd: String, entryAlias: String, entryPwd: String, type: String = KeyStore.getDefaultType()): SecretKey {

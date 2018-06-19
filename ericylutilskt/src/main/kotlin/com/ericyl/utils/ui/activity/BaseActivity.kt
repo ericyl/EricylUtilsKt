@@ -3,7 +3,6 @@ package com.ericyl.utils.ui.activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import android.view.View
 
 /**
  * @author ericyl on 2017/7/31

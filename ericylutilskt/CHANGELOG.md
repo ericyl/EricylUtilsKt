@@ -45,3 +45,8 @@
 
 ### 0.0.12
 * 更新 CustomSearchView 代码
+
+### 0.0.13
+* 更新代码
+* 更新 Kotlin 版本号
+* 新增 BaseGridLayoutManager 

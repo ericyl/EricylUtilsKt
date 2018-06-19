@@ -3,16 +3,13 @@ package com.ericyl.utils.util
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.ContextWrapper
 import android.os.Build
 import android.provider.Settings
 import android.support.annotation.RequiresPermission
 import android.telephony.TelephonyManager
 import android.text.TextUtils
-import java.io.BufferedReader
 import java.io.FileNotFoundException
 import java.io.FileReader
-import java.io.UnsupportedEncodingException
 import java.util.*
 
 /**
@@ -40,12 +37,12 @@ enum class IMSI(private val tag: String) {
 
 @RequiresPermission(value = Manifest.permission.READ_PHONE_STATE)
 @SuppressLint("HardwareIds")
-fun ContextWrapper.getImsi(): IMSI =
+fun Context.getImsi(): IMSI =
         IMSI.getImsi(getSimCode())
 
 @RequiresPermission(value = Manifest.permission.READ_PHONE_STATE)
 @SuppressLint("HardwareIds")
-fun ContextWrapper.getSimCode(): String {
+fun Context.getSimCode(): String {
     return (getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager).subscriberId
 }
 
@@ -109,7 +106,7 @@ enum class PhoneManufacturer {
 }
 
 @SuppressLint("PrivateApi")
-fun ContextWrapper.checkHasNavigationBar(): Boolean {
+fun Context.checkHasNavigationBar(): Boolean {
     return when (PhoneManufacturer.getPhoneManufacturer()) {
         PhoneManufacturer.MEI_ZU -> checkMeiZuHasNavigationBar()
         else -> {
@@ -130,11 +127,11 @@ fun ContextWrapper.checkHasNavigationBar(): Boolean {
     }
 }
 
-private fun ContextWrapper.checkMeiZuHasNavigationBar(): Boolean {
+private fun Context.checkMeiZuHasNavigationBar(): Boolean {
     return Settings.System.getInt(contentResolver, "mz_smartbar_auto_hide", 0) == 1
 }
 
-fun ContextWrapper.getNavigationBarHeight(): Int {
+fun Context.getNavigationBarHeight(): Int {
     return when (PhoneManufacturer.getPhoneManufacturer()) {
         PhoneManufacturer.MEI_ZU -> getMeiZuNavigationBarHeight()
         else -> {
@@ -147,7 +144,7 @@ fun ContextWrapper.getNavigationBarHeight(): Int {
 }
 
 @SuppressLint("PrivateApi")
-private fun ContextWrapper.getMeiZuNavigationBarHeight(): Int {
+private fun Context.getMeiZuNavigationBarHeight(): Int {
     return if (checkMeiZuHasNavigationBar()) {
         try {
             val c = Class.forName("com.android.internal.R\$dimen")
@@ -162,7 +159,7 @@ private fun ContextWrapper.getMeiZuNavigationBarHeight(): Int {
     } else 0
 }
 
-fun ContextWrapper.getStatusBarHeight(): Int {
+fun Context.getStatusBarHeight(): Int {
     val statusBarHeightId = resources.getIdentifier("status_bar_height", "dimen", "android")
     return if (statusBarHeightId > 0)
         resources.getDimensionPixelSize(statusBarHeightId)

@@ -1,20 +1,21 @@
 package com.ericyl.utils.util
 
 import java.io.File
+import java.io.FileOutputStream
 import java.text.DecimalFormat
 
 /**
  * @author ericyl on 2017/12/19.
  */
 
-fun getFolderSize(file: File): Long {
+fun File.getFolderSize(): Long {
     var size: Long = 0
-    val fileList = file.listFiles()
+    val fileList = listFiles()
     if (fileList == null || fileList.isEmpty())
         return 0
     for (i in fileList.indices) {
         size = if (fileList[i].isDirectory) {
-            size + getFolderSize(fileList[i])
+            size + fileList[i].getFolderSize()
 
         } else {
             size + fileList[i].length()
@@ -24,21 +25,21 @@ fun getFolderSize(file: File): Long {
     return size
 }
 
-fun deleteFiles(file: File) {
-    if (!file.exists())
+fun File.deleteFiles() {
+    if (!exists())
         return
-    if (file.isFile)
-        file.delete()
-    else if (file.isDirectory) {
-        val childFiles = file.listFiles()
+    if (isFile)
+        delete()
+    else if (isDirectory) {
+        val childFiles = listFiles()
         if (childFiles == null || childFiles.isEmpty()) {
-            file.delete()
+            delete()
             return
         }
         for (childFile in childFiles) {
-            deleteFiles(childFile)
+            childFile.deleteFiles()
         }
-        file.delete()
+        delete()
     }
 }
 
@@ -56,5 +57,11 @@ fun Long.formatFolderSize(): CharSequence {
         this >= MB_2_BYTE -> "${DOUBLE_DECIMAL_FORMAT.format(this / MB_2_BYTE)} MB"
         this >= KB_2_BYTE -> "${DOUBLE_DECIMAL_FORMAT.format(this / KB_2_BYTE)} KB"
         else -> "$this B"
+    }
+}
+
+fun ByteArray.saveToFile(path: String, flag: Boolean = false) {
+    FileOutputStream(path, flag).use {
+        it.write(this)
     }
 }

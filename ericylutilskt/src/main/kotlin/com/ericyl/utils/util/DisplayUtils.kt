@@ -3,7 +3,6 @@ package com.ericyl.utils.util
 import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Context
-import android.content.ContextWrapper
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Build

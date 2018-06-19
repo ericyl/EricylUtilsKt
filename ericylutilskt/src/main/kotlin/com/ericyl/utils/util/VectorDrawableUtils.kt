@@ -6,10 +6,8 @@ import android.graphics.Canvas
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.support.annotation.ColorInt
-import android.support.annotation.ColorRes
 import android.support.annotation.DrawableRes
 import android.support.graphics.drawable.VectorDrawableCompat
-import android.support.v4.content.ContextCompat
 
 /**
  * Created by Vipul on 28/12/16.
@@ -21,7 +19,6 @@ fun Context.getVectorDrawable(@DrawableRes drawableResId: Int): Drawable? {
 
 fun Context.getVectorDrawable(@DrawableRes drawableResId: Int, @ColorInt color: Int): Drawable {
     val drawable = getVectorDrawable(drawableResId)
-//    drawable!!.setColorFilter(ContextCompat.getColor(this, colorFilter), PorterDuff.Mode.SRC_IN)
     drawable!!.setColorFilter(color, PorterDuff.Mode.SRC_IN)
     return drawable
 }

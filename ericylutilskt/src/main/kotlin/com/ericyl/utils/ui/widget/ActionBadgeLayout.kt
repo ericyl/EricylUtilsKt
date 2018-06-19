@@ -1,10 +1,8 @@
 package com.ericyl.utils.ui.widget
 
 import android.content.Context
-import android.support.annotation.AttrRes
 import android.support.annotation.ColorRes
 import android.support.annotation.DrawableRes
-import android.support.annotation.StyleRes
 import android.support.v4.content.ContextCompat
 import android.support.v4.graphics.drawable.DrawableCompat
 import android.text.TextUtils
