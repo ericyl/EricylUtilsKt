@@ -1,4 +1,6 @@
 # EricylUtils for Kotlin
+[![Download](https://api.bintray.com/packages/ericyl/EricylUtils/EricylUtilsKt/images/download.svg)](https://bintray.com/ericyl/EricylUtils/EricylUtilsKt/_latestVersion)
+
 开发环境: Android Studio 3.1
 
 刚开始接触Kotlin, 代码可能很糟糕，项目会抽时间一点一点完善

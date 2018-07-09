@@ -1,4 +1,5 @@
 # library
+[![Download](https://api.bintray.com/packages/ericyl/EricylUtils/EricylUtilsKt/images/download.svg)](https://bintray.com/ericyl/EricylUtils/EricylUtilsKt/_latestVersion)
 
 ### 主要功能:
 Android 控件及公共类的封装
