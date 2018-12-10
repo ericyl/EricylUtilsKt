@@ -4,7 +4,7 @@ package com.ericyl.utils.cryptographical.exception
  * @author ericyl
  * 2017/7/31
  */
-class CryptoException : Exception {
+class CryptoException : RuntimeException {
     constructor() : super()
     constructor(message: String?) : super(message)
     constructor(message: String?, cause: Throwable?) : super(message, cause)

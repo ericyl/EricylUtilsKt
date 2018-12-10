@@ -32,7 +32,7 @@ fun getSecretKey(password: String, salt: ByteArray, iterationCount: Int = 1000, 
         val keySpec = PBEKeySpec(password.toCharArray(), salt, iterationCount, keyLength)
         val keyBytes = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1").generateSecret(keySpec).encoded
         return SecretKeySpec(keyBytes, "AES")
-    } catch(e: Exception) {
+    } catch (e: Exception) {
         throw CryptoException(e)
     }
 }
@@ -41,11 +41,11 @@ fun getSecretKey(password: String, salt: ByteArray, iterationCount: Int = 1000, 
 private fun getSecretKey(password: String): SecretKey {
     try {
         val keyGen = KeyGenerator.getInstance("AES")
-        val secureRandom = SecureRandom.getInstance("SHA1PRNG", "Crypto")
+        val secureRandom = SecureRandom.getInstance("SHA1PRNG")
         secureRandom.setSeed(password.toByteArray(charset("UTF-8")))
         keyGen.init(128, secureRandom)
         return keyGen.generateKey()
-    } catch(e: Exception) {
+    } catch (e: Exception) {
         throw CryptoException(e)
     }
 }
@@ -60,7 +60,7 @@ fun Context.saveToKeyStore(key: SecretKey, fileName: String, storePwd: String, e
         fos.use {
             keyStore.store(fos, storePwd.toCharArray())
         }
-    } catch(e: Exception) {
+    } catch (e: Exception) {
         throw CryptoException(e)
     }
 }
@@ -71,7 +71,7 @@ fun Context.saveKey(key: ByteArray, fileName: String) {
         fos.use {
             fos.write(key)
         }
-    } catch(e: Exception) {
+    } catch (e: Exception) {
         throw CryptoException(e)
     }
 }
