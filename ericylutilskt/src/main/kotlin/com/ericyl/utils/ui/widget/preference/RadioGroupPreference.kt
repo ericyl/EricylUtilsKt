@@ -146,7 +146,7 @@ class RadioGroupPreference(context: Context, attrs: AttributeSet, defStyleAttr: 
         lateinit var value: String
 
         constructor(source: Parcel) : super(source) {
-            value = source.readString()
+            value = source.readString() ?: "0"
         }
 
         constructor(parcelable: Parcelable) : super(parcelable)

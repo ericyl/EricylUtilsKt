@@ -14,18 +14,18 @@ class RSACryptoImpl private constructor(private val key: RSAKeySpec, algorithm: 
 
     private val cipher = Cipher.getInstance(algorithm)
 
-    override fun encrypt(data: ByteArray): ByteArray {
+    override fun encrypt(byteArray: ByteArray): ByteArray {
         try {
-            return doFinal(Cipher.ENCRYPT_MODE, data)
+            return doFinal(Cipher.ENCRYPT_MODE, byteArray)
         } catch (e: Exception) {
             throw CryptoException(e)
         }
 
     }
 
-    override fun decrypt(data: ByteArray): ByteArray {
+    override fun decrypt(byteArray: ByteArray): ByteArray {
         try {
-            return doFinal(Cipher.DECRYPT_MODE, data)
+            return doFinal(Cipher.DECRYPT_MODE, byteArray)
         } catch (e: Exception) {
             throw CryptoException(e)
         }

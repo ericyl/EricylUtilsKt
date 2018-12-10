@@ -36,12 +36,13 @@ class NumberPickerPreference(context: Context, attrs: AttributeSet, defStyleAttr
     init {
         val a = context.obtainStyledAttributes(attrs, R.styleable.NumberPickerPreference, defStyleAttr, R.style.defaultStyle_NumberPickerPreference)
         try {
-            maxExternalKey = a.getString(R.styleable.NumberPickerPreference_maxExternal)
-            minExternalKey = a.getString(R.styleable.NumberPickerPreference_minExternal)
+            //todo
+            maxExternalKey = a.getString(R.styleable.NumberPickerPreference_maxExternal)!!
+            minExternalKey = a.getString(R.styleable.NumberPickerPreference_minExternal)!!
             max = a.getInt(R.styleable.NumberPickerPreference_max, MAX_VALUE)
             min = a.getInt(R.styleable.NumberPickerPreference_min, MIN_VALUE)
             textEnable = a.getBoolean(R.styleable.NumberPickerPreference_textEnable, false)
-            textDigits = a.getString(R.styleable.NumberPickerPreference_textDigits)
+            textDigits = a.getString(R.styleable.NumberPickerPreference_textDigits)!!
         } finally {
             a.recycle()
         }

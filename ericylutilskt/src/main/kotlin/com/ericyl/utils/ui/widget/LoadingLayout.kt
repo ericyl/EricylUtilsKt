@@ -4,6 +4,8 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.support.annotation.ColorInt
+import android.support.v4.content.ContextCompat
+import android.support.v4.graphics.drawable.DrawableCompat
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -80,10 +82,11 @@ class LoadingLayout(context: Context, attrs: AttributeSet, defStyleAttr: Int) : 
             failedImageColor = a.getColor(R.styleable.LoadingLayout_failedImageColor, Color.TRANSPARENT)
             showProgressBar = a.getBoolean(R.styleable.LoadingLayout_showProgressBar, true)
             showFailedImage = a.getBoolean(R.styleable.LoadingLayout_showFailedImage, true)
-            failedImage = a.getDrawable(R.styleable.LoadingLayout_failedImage)
-            loadingMessage = a.getString(R.styleable.LoadingLayout_loadingMessage)
-            failedMessage = a.getString(R.styleable.LoadingLayout_failedMessage)
-            finishMessage = a.getString(R.styleable.LoadingLayout_finishMessage)
+
+            failedImage = a.getDrawable(R.styleable.LoadingLayout_failedImage)!!
+            loadingMessage = a.getString(R.styleable.LoadingLayout_loadingMessage) ?: context.getString(R.string.loading)
+            failedMessage = a.getString(R.styleable.LoadingLayout_failedMessage) ?: context.getString(R.string.load_error)
+            finishMessage = a.getString(R.styleable.LoadingLayout_finishMessage) ?: context.getString(R.string.load_finish)
         } finally {
             a.recycle()
         }

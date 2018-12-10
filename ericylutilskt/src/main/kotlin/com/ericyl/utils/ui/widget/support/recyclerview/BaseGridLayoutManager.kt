@@ -12,7 +12,8 @@ class BaseGridLayoutManager(context: Context, spanCount: Int) : GridLayoutManage
 
     override fun isBottom(recyclerView: RecyclerView): Boolean {
         val lastVisiblePosition = findLastCompletelyVisibleItemPosition()
-        val lastPosition = recyclerView.adapter.itemCount - 1
+
+        val lastPosition = recyclerView.adapter!!.itemCount - 1
         return lastVisiblePosition == lastPosition
     }
 
