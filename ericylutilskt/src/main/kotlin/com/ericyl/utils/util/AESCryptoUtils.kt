@@ -37,18 +37,18 @@ fun getSecretKey(password: String, salt: ByteArray, iterationCount: Int = 1000, 
     }
 }
 
-@Deprecated("This function is deprecated", ReplaceWith("getSecretKey(String, ByteArray, Int, Int)"))
-private fun getSecretKey(password: String): SecretKey {
-    try {
-        val keyGen = KeyGenerator.getInstance("AES")
-        val secureRandom = SecureRandom.getInstance("SHA1PRNG")
-        secureRandom.setSeed(password.toByteArray(charset("UTF-8")))
-        keyGen.init(128, secureRandom)
-        return keyGen.generateKey()
-    } catch (e: Exception) {
-        throw CryptoException(e)
-    }
-}
+//@Deprecated("This function is deprecated", ReplaceWith("getSecretKey(String, ByteArray, Int, Int)"))
+//private fun getSecretKey(password: String): SecretKey {
+//    try {
+//        val keyGen = KeyGenerator.getInstance("AES")
+//        val secureRandom = SecureRandom.getInstance("SHA1PRNG")
+//        secureRandom.setSeed(password.toByteArray(charset("UTF-8")))
+//        keyGen.init(128, secureRandom)
+//        return keyGen.generateKey()
+//    } catch (e: Exception) {
+//        throw CryptoException(e)
+//    }
+//}
 
 fun Context.saveToKeyStore(key: SecretKey, fileName: String, storePwd: String, entryAlias: String, entryPwd: String, type: String = KeyStore.getDefaultType()) {
     try {

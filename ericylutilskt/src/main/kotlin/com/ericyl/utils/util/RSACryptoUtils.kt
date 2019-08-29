@@ -1,64 +1,106 @@
-//package com.ericyl.utils.util
-//
-//import android.content.Context
-//import android.util.Base64
-//import com.ericyl.utils.cryptographical.aes.AESCryptoImpl
-//import com.ericyl.utils.cryptographical.aes.AESCryptoKey
-//import com.ericyl.utils.cryptographical.exception.CryptoException
-//import com.ericyl.utils.cryptographical.rsa.RSAKeySpec
-//import java.io.File
-//import java.io.FileOutputStream
-//import java.io.InputStream
-//import java.security.KeyStore
-//import java.security.SecureRandom
-//import javax.crypto.KeyGenerator
-//import javax.crypto.SecretKey
-//import javax.crypto.SecretKeyFactory
-//import javax.crypto.spec.PBEKeySpec
-//import javax.crypto.spec.SecretKeySpec
-//
-///**
-// * @author ericyl
-// */
-//private const val SIZE_32 = 32
-//
-//
-//fun getRsaKey(password: String, salt: ByteArray, iterationCount: Int = 1000, keyLength: Int = SIZE_32 * 8): SecretKey {
-//    try {
-//        val keySpec = PBEKeySpec(password.toCharArray(), salt, iterationCount, keyLength)
-//        val keyBytes = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1").generateSecret(keySpec).encoded
-//        return SecretKeySpec(keyBytes, "AES")
-//    } catch (e: Exception) {
-//        throw CryptoException(e)
-//    }
-//}
-//
-//@Deprecated("This function is deprecated", ReplaceWith("getSecretKey(String, ByteArray, Int, Int)"))
-//private fun getSecretKey(password: String): SecretKey {
-//    try {
-//        val keyGen = KeyGenerator.getInstance("AES")
-//        val secureRandom = SecureRandom.getInstance("SHA1PRNG")
-//        secureRandom.setSeed(password.toByteArray(charset("UTF-8")))
-//        keyGen.init(128, secureRandom)
-//        return keyGen.generateKey()
-//    } catch (e: Exception) {
-//        throw CryptoException(e)
-//    }
-//}
-//
-//
-//fun Context.readSecretKeyFromAssets(fileName: String, storePwd: String, entryAlias: String, entryPwd: String, type: String = KeyStore.getDefaultType()) = readSecretKey(resources.assets.open(fileName), storePwd, entryAlias, entryPwd, type)
-//
-//
-//fun readSecretKey(fis: InputStream, storePwd: String, entryAlias: String, entryPwd: String, type: String = KeyStore.getDefaultType()): SecretKey {
-//    fis.use {
-//        val keyStore = KeyStore.getInstance(type)
-//        keyStore.load(fis, storePwd.toCharArray())
-//        val secretKeyEntry = keyStore.getEntry(entryAlias, KeyStore.PasswordProtection(entryPwd.toCharArray())) as KeyStore.SecretKeyEntry
-//        return secretKeyEntry.secretKey
-//    }
-//}
-//
-//fun encrypt(secretKey: RSAKeySpec, iv: ByteArray, originalText: String) = Base64.encodeToString(AESCryptoImpl.create(AESCryptoKey(secretKey).getKey().encoded, iv).encrypt(originalText.toByteArray(charset("UTF-8"))), Base64.NO_WRAP)
-//
-//fun decrypt(secretKey: RSAKeySpec, iv: ByteArray, cipherText: String) = String(AESCryptoImpl.create(secretKey.encoded, iv).decrypt(Base64.decode(cipherText, Base64.NO_WRAP)), charset("UTF-8"))
+package com.ericyl.utils.util
+
+import android.content.Context
+import android.util.Base64
+import com.ericyl.utils.cryptographical.rsa.RSACryptoImpl
+import java.io.InputStream
+import java.security.Key
+import java.security.KeyFactory
+import java.security.Signature
+import java.security.cert.X509Certificate
+import java.security.interfaces.RSAKey
+import java.security.interfaces.RSAPrivateKey
+import java.security.interfaces.RSAPublicKey
+import java.security.spec.X509EncodedKeySpec
+import java.util.*
+
+object RSAUtils {
+
+    private var publicKey: RSAPublicKey? = null
+    private var certificate: X509Certificate? = null
+
+    private const val RSA_ALGORITHM = "RSA"
+    private const val RSA_PADDING = "RSA/ECB/PKCS1Padding"
+
+    private const val SIGN_ALGORITHMS = "SHA1WithRSA"
+
+
+    fun Context.getPublicKey(fileName: String) = getPublicKey(resources.assets.open(fileName))
+
+    /**
+     * 得到公钥
+     *
+     * @throws Exception
+     */
+    @Throws(Exception::class)
+    fun getPublicKey(fis: InputStream): RSAPublicKey? {
+        if (publicKey == null) {
+            synchronized(RSAPublicKey::class.java) {
+                if (publicKey == null) {
+                    val keyFactory = KeyFactory.getInstance(RSA_ALGORITHM)
+                    fis.use {
+                        val x509KeySpec = X509EncodedKeySpec(it.readBytes())
+                        publicKey = keyFactory.generatePublic(x509KeySpec) as RSAPublicKey
+                    }
+                }
+            }
+        }
+        return publicKey
+    }
+
+    fun <T> encrypt(t: T, text: ByteArray): String where T : Key, T : RSAKey {
+        return Base64.encodeToString(RSACryptoImpl.create(t, RSA_PADDING).encrypt(text), Base64.NO_WRAP)
+    }
+
+    fun <T> decrypt(t: T, text: String): ByteArray where T : Key, T : RSAKey {
+        return RSACryptoImpl.create(t, RSA_PADDING).decrypt(Base64.decode(text, Base64.NO_WRAP))
+    }
+
+
+
+    /**
+     * 签名
+     */
+    @Throws(Exception::class)
+    fun sign(privateKey: RSAPrivateKey, content: String): String {
+        val signature = Signature.getInstance(SIGN_ALGORITHMS)
+        signature.initSign(privateKey)
+        signature.update(content.toByteArray(Charsets.UTF_8))
+        val signed = signature.sign()
+        return Base64.encodeToString(signed, Base64.NO_WRAP)
+    }
+
+    /**
+     * 验证
+     */
+    @Throws(Exception::class)
+    fun doCheck(publicKey: RSAPublicKey, content: String, sign: String): Boolean {
+        val signature = Signature.getInstance(SIGN_ALGORITHMS)
+        signature.initVerify(publicKey)
+        signature.update(content.toByteArray(Charsets.UTF_8))
+        return signature.verify(Base64.decode(sign, Base64.NO_WRAP))
+    }
+
+    /**
+     * 校验证书
+     */
+    fun verify(certificate: X509Certificate, rsaPublicKey: RSAPublicKey): Boolean {
+        return verifyCertificate(Date(), certificate, rsaPublicKey)
+    }
+
+    /**
+     * 校验证书
+     */
+    private fun verifyCertificate(date: Date, certificate: X509Certificate, rsaPublicKey: RSAPublicKey): Boolean {
+        return try {
+            certificate.checkValidity(date)
+            certificate.verify(rsaPublicKey)
+            true
+        } catch (e: Exception) {
+            false
+        }
+
+    }
+
+
+}

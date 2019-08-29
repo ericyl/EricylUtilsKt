@@ -5,9 +5,9 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
-import android.support.annotation.ColorInt
-import android.support.annotation.DrawableRes
-import android.support.graphics.drawable.VectorDrawableCompat
+import androidx.annotation.ColorInt
+import androidx.annotation.DrawableRes
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 
 /**
  * Created by Vipul on 28/12/16.

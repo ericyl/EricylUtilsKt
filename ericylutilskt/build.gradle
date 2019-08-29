@@ -1,16 +1,15 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'org.jetbrains.dokka-android'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion target_sdk
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 28
-        versionCode 14
-        versionName "0.0.14"
+        minSdkVersion min_sdk
+        targetSdkVersion target_sdk
+        versionCode version_code
+        versionName library_version
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -36,28 +35,20 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation "com.android.support.test:runner:$android_test_runner_version"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:$android_espresso_core_version"
-    implementation "com.android.support.constraint:constraint-layout:$constraint_layout_version"
-    implementation "com.android.support:appcompat-v7:$android_support_version"
-    implementation "com.android.support:design:$android_support_version"
-
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.appcompat:appcompat:$androidx_appcompat_version"
+    implementation "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
+    implementation "androidx.core:core-ktx:$androidx_core_ktx_version"
+    implementation "androidx.constraintlayout:constraintlayout:$androidx_constraintlayout_version"
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test:runner:$androidx_test_runner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$androidx_test_espresso_version"
 
     implementation "org.jetbrains.anko:anko:$anko_version"
-
-    implementation "com.google.zxing:core:$zxing_version"
-    implementation "com.google.zxing:android-core:$zxing_version"
+    implementation "com.google.zxing:core:$zxing_core_version"
+    implementation "com.google.zxing:android-core:$zxing_android_core_version"
 
 }
 
-dokka {
-    outputFormat = 'html'
-    outputDirectory = "$buildDir/javadoc"
-}
-
-apply from: 'bintray.gradle'
-
+apply from: "bintray.gradle"

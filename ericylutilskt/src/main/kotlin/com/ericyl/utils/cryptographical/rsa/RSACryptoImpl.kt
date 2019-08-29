@@ -1,18 +1,25 @@
 package com.ericyl.utils.cryptographical.rsa
 
-
 import com.ericyl.utils.cryptographical.Cryptographical
 import com.ericyl.utils.cryptographical.exception.CryptoException
-
 import java.io.ByteArrayOutputStream
-import java.security.interfaces.RSAPrivateKey
-import java.security.interfaces.RSAPublicKey
-
+import java.security.Key
+import java.security.interfaces.RSAKey
 import javax.crypto.Cipher
 
-class RSACryptoImpl private constructor(private val key: RSAKeySpec, algorithm: String) : Cryptographical {
+class RSACryptoImpl<T> private constructor(algorithm: String, private val key: T) :
+    Cryptographical where T : Key, T : RSAKey {
 
-    private val cipher = Cipher.getInstance(algorithm)
+    private var cipher: Cipher
+
+    init {
+        try {
+            this.cipher = Cipher.getInstance(algorithm)
+        } catch (e: Exception) {
+            throw CryptoException(e)
+        }
+
+    }
 
     override fun encrypt(byteArray: ByteArray): ByteArray {
         try {
@@ -39,22 +46,9 @@ class RSACryptoImpl private constructor(private val key: RSAKeySpec, algorithm: 
     }
 
     companion object {
-        fun create(keySpec: RSAKeySpec, algorithm: String): RSACryptoImpl {
-            try {
-                return RSACryptoImpl(keySpec, algorithm)
-            } catch (e: Exception) {
-                throw CryptoException(e)
-            }
 
-
-        }
-
-        fun <T> create(key: T, algorithm: String): RSACryptoImpl where T : RSAPrivateKey, T : RSAPublicKey {
-            try {
-                return RSACryptoImpl(RSACryptoKey.getInstance(key).getKey(), algorithm)
-            } catch (e: Exception) {
-                throw CryptoException(e)
-            }
+        fun <T> create(key: T, algorithm: String): RSACryptoImpl<*> where T : Key, T : RSAKey {
+            return RSACryptoImpl(algorithm, key)
         }
 
         private fun rsaSplitCodec(cipher: Cipher, opmode: Int, datas: ByteArray, keySize: Int): ByteArray {
@@ -75,17 +69,16 @@ class RSACryptoImpl private constructor(private val key: RSAKeySpec, algorithm: 
                         } else {
                             cipher.doFinal(datas, offSet, datas.size - offSet)
                         }
-                        out.write(buff, 0, buff.size)
+                        it.write(buff, 0, buff.size)
                         i++
                         offSet = i * maxBlock
                     }
                 } catch (e: Exception) {
                     throw CryptoException("加解密阀值为[$maxBlock]的数据时发生异常", e)
                 }
-
-                return out.toByteArray()
             }
 
+            return out.toByteArray()
         }
     }
 

@@ -1,7 +1,7 @@
 package com.ericyl.utils.annotation;
 
-import android.support.annotation.IntDef;
 import android.view.View;
+import androidx.annotation.IntDef;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

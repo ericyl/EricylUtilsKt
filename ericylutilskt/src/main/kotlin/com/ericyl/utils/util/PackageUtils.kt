@@ -17,11 +17,13 @@ import java.util.ArrayList
 fun Context.installApk(filePath: String): Boolean {
     val intent = Intent(Intent.ACTION_VIEW)
     var file: File? = null
-    if (!filePath.isEmpty())
+    if (filePath.isNotEmpty())
         file = File(filePath)
     return if (file != null && file.exists() && file.isFile) {
-        intent.setDataAndType(Uri.parse("file://$filePath"),
-                "application/vnd.android.package-archive")
+        intent.setDataAndType(
+            Uri.parse("file://$filePath"),
+            "application/vnd.android.package-archive"
+        )
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         true
@@ -37,11 +39,15 @@ fun Context.uninstallApk(packageName: String) {
 fun Context.findApk(packageName: String): Boolean {
     try {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            packageManager.getApplicationInfo(packageName,
-                    PackageManager.MATCH_UNINSTALLED_PACKAGES)
+            packageManager.getApplicationInfo(
+                packageName,
+                PackageManager.MATCH_UNINSTALLED_PACKAGES
+            )
         } else {
-            packageManager.getApplicationInfo(packageName,
-                    PackageManager.GET_UNINSTALLED_PACKAGES)
+            packageManager.getApplicationInfo(
+                packageName,
+                PackageManager.GET_UNINSTALLED_PACKAGES
+            )
         }
         return true
     } catch (e: PackageManager.NameNotFoundException) {
@@ -53,15 +59,13 @@ fun Context.findApk(packageName: String): Boolean {
 fun Context.getVersionName(packageName: String): String? {
     val packageInfoList = getAllPackageInfos()
     return packageInfoList
-            .first { it.packageName == packageName }.versionName
+        .first { it.packageName == packageName }.versionName
 
 }
 
-fun Context.getVersionCode(packageName: String): Int {
+fun Context.getVersionCode(packageName: String): Long {
     val packageInfoList = getAllPackageInfos()
-    return packageInfoList
-            .first { it.packageName == packageName }.versionCode
-
+    return packageInfoList.first { it.packageName == packageName }.longVersionCode
 }
 
 internal fun Context.getAllPackageInfos(): List<PackageInfo> {
@@ -97,8 +101,13 @@ fun Context.getPackageInfos(isSystem: Boolean = false): List<PackageInfo> {
  * @param flags             intent.flag link{Intent.ACTION_*}
  * default{Intent.FLAG_ACTIVITY_NEW_TASK}
  */
-fun Context.jumpActivity(packageName: String,
-                         startActivityName: String, bundle: Bundle? = null, action: String? = null, flags: Int = Intent.FLAG_ACTIVITY_NEW_TASK) {
+fun Context.jumpActivity(
+    packageName: String,
+    startActivityName: String,
+    bundle: Bundle? = null,
+    action: String? = null,
+    flags: Int = Intent.FLAG_ACTIVITY_NEW_TASK
+) {
     val intent = Intent()
     if (action != null)
         intent.action = action

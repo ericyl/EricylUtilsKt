@@ -1,8 +1,8 @@
 package com.ericyl.utils.ui.widget.support.recyclerview
 
 import android.content.Context
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class BaseGridLayoutManager(context: Context, spanCount: Int) : GridLayoutManager(context, spanCount), IScrollManager {
 

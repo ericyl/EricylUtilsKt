@@ -5,9 +5,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.provider.Settings
-import android.support.annotation.RequiresPermission
 import android.telephony.TelephonyManager
 import android.text.TextUtils
+import androidx.annotation.RequiresPermission
 import java.io.FileNotFoundException
 import java.io.FileReader
 import java.util.*
@@ -85,7 +85,7 @@ fun Context.getDeviceUUID(): UUID? {
  * @return windows, linux, mac os x...
  */
 fun getOS(): String {
-    return System.getProperty("os.name").toLowerCase()
+    return System.getProperty("os.name")?.toLowerCase()?:"unknown"
 }
 
 

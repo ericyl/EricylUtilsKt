@@ -1,6 +1,6 @@
 package com.ericyl.utils.ui.widget.support.recyclerview
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 
 interface IScrollManager {
     fun isTop(recyclerView: RecyclerView): Boolean

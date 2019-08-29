@@ -5,12 +5,12 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.support.annotation.ColorInt
-import android.support.annotation.ColorRes
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.AppCompatTextView
 import android.text.TextUtils
 import android.util.AttributeSet
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
 
 import com.ericyl.utils.R
 import com.ericyl.utils.util.randomColor

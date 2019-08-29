@@ -3,13 +3,13 @@ package com.ericyl.utils.ui.widget
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.support.v7.content.res.AppCompatResources
-import android.support.v7.widget.SearchView
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.KeyEvent
 import android.view.View
 import android.widget.ImageView
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.widget.SearchView
 
 import com.ericyl.utils.R
 import org.jetbrains.anko.dip
@@ -50,12 +50,12 @@ class CustomSearchView(context: Context, attrs: AttributeSet, defStyleAttr: Int)
             if (a.hasValue(R.styleable.CustomSearchView_custom_submitAreaBackground))
                 submitAreaBackground = a.getColor(R.styleable.CustomSearchView_custom_submitAreaBackground, Color.TRANSPARENT)
 
-            searchAutoComplete = findViewById(android.support.v7.appcompat.R.id.search_src_text)
+            searchAutoComplete = findViewById(androidx.appcompat.R.id.search_src_text)
             searchAutoComplete.textSize = px2sp(editTextSize)
 
             isSubmitButtonEnabled = true
 
-            val btnGo = findViewById<ImageView>(android.support.v7.appcompat.R.id.search_go_btn)
+            val btnGo = findViewById<ImageView>(androidx.appcompat.R.id.search_go_btn)
             if (imgGo == null)
                 btnGo.setImageResource(R.drawable.ic_search_query)
             else
@@ -63,8 +63,8 @@ class CustomSearchView(context: Context, attrs: AttributeSet, defStyleAttr: Int)
 
             btnGo.setPadding(goPaddingLeft, 0, goPaddingRight, 0)
 
-            findViewById<View>(android.support.v7.appcompat.R.id.search_plate).setBackgroundColor(searchPlateBackground)
-            findViewById<View>(android.support.v7.appcompat.R.id.submit_area).setBackgroundColor(submitAreaBackground)
+            findViewById<View>(androidx.appcompat.R.id.search_plate).setBackgroundColor(searchPlateBackground)
+            findViewById<View>(androidx.appcompat.R.id.submit_area).setBackgroundColor(submitAreaBackground)
         } finally {
             a.recycle()
         }
@@ -83,7 +83,7 @@ class CustomSearchView(context: Context, attrs: AttributeSet, defStyleAttr: Int)
         val baseColor = AppCompatResources.getColorStateList(
                 context, value.resourceId)
         if (!context.theme.resolveAttribute(
-                        android.support.v7.appcompat.R.attr.colorPrimary, value, true)) {
+                        androidx.appcompat.R.attr.colorPrimary, value, true)) {
             return null
         }
         val colorPrimary = value.data
