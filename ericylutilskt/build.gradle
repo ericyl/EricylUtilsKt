@@ -41,6 +41,7 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
     implementation "androidx.core:core-ktx:$androidx_core_ktx_version"
     implementation "androidx.constraintlayout:constraintlayout:$androidx_constraintlayout_version"
+    implementation "com.google.android.material:material:$material_design_version"
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test:runner:$androidx_test_runner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidx_test_espresso_version"
