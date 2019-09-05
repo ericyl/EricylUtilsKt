@@ -9,22 +9,27 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import androidx.core.content.FileProvider.getUriForFile
 
 import java.io.File
 import java.util.ArrayList
 
 
-fun Context.installApk(filePath: String): Boolean {
+fun Context.installApk(filePath: String, authority: String): Boolean {
     val intent = Intent(Intent.ACTION_VIEW)
     var file: File? = null
     if (filePath.isNotEmpty())
         file = File(filePath)
     return if (file != null && file.exists() && file.isFile) {
-        intent.setDataAndType(
-            Uri.parse("file://$filePath"),
-            "application/vnd.android.package-archive"
-        )
+        val uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            getUriForFile(this, authority, file)
+        } else {
+            Uri.fromFile(file)
+        }
+
+        intent.setDataAndType(uri, "application/vnd.android.package-archive")
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         startActivity(intent)
         true
     } else false

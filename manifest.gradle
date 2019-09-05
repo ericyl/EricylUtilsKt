@@ -6,8 +6,8 @@ ext {
 
     min_sdk = 15
     target_sdk = 28
-    version_code = 18
-    library_version = '0.0.18'
+    version_code = 20
+    library_version = '0.0.20'
 
     bintray_project_name = 'EricylUtilsKt'
     library_description = 'private library'
